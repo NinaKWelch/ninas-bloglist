@@ -8,7 +8,7 @@ import LoginForm from './components/LoginForm'
 import Blogs from './components/Blogs'
 
 const App = () => {
-  const [errorMessage, setErrorMessage] = useState(null)
+  const [message, setMessage] = useState(null)
   const [username, setUsername] = useState('') 
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
@@ -32,10 +32,16 @@ const App = () => {
     }
   }, [])
 
-  const handleError = message => {
-    setErrorMessage(message)
+  const handleMessage = (text, type) => {
+    const message = {
+      text,
+      type
+    }
+
+    setMessage(message)
+
     setTimeout(() => {
-      setErrorMessage(null)
+      setMessage(null)
     }, 5000)
   }
 
@@ -56,8 +62,9 @@ const App = () => {
       setUser(user)
       setUsername('')
       setPassword('')
+      handleMessage(`Logged in as ${user.name}`, 'success')
     } catch (exception) {
-      handleError('Login failed')
+      handleMessage('Check username and password', 'error')
     }
   }
 
@@ -65,18 +72,19 @@ const App = () => {
     try {
       await window.localStorage.clear()
       setUser(null)
+      handleMessage(`${user.name} logged out`, 'success')
     } catch (exception) {
-      handleError('Logut failed')
+      handleMessage('Logout error', 'error')
     }
   }
 
   const addNewBlog = async blog => {
     try {
-      console.log(blog)
       const newBlog = await blogService.create(blog)
       setBlogs(blogs.concat(newBlog))
+      handleMessage(`New Blog '${blog.title}' by ${blog.author} added`, 'success')
     } catch (exception) {
-      handleError('Blog failed')
+      handleMessage('Some information is missing', 'error')
     } 
   }
 
@@ -88,7 +96,7 @@ const App = () => {
 
   return (
     <div style={appStyle}>
-      <Notification message={errorMessage} />
+      <Notification message={message} />
       
       {user === null
         ? <LoginForm handleLogin={handleLogin}

@@ -5,7 +5,7 @@ import blogService from './services/blog'
 
 import Notification from './components/Notification'
 import LoginForm from './components/LoginForm'
-import BlogList from './components/BlogList'
+import Blogs from './components/Blogs'
 
 const App = () => {
   const [errorMessage, setErrorMessage] = useState(null)
@@ -24,11 +24,20 @@ const App = () => {
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBloglistUser')
+    
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
+      blogService.setToken(user.token)
     }
   }, [])
+
+  const handleError = message => {
+    setErrorMessage(message)
+    setTimeout(() => {
+      setErrorMessage(null)
+    }, 5000)
+  }
 
   const handleLogin = async event => {
     event.preventDefault()
@@ -43,27 +52,32 @@ const App = () => {
         'loggedBloglistUser', JSON.stringify(user)
       )
 
+      blogService.setToken(user.token)
       setUser(user)
       setUsername('')
       setPassword('')
     } catch (exception) {
-      setErrorMessage('Wrong credentials')
-      setTimeout(() => {
-        setErrorMessage(null)
-      }, 5000)
+      handleError('Login failed')
     }
   }
 
-  const handleLogout = async event => {
+  const handleLogout = async () => {
     try {
-      window.localStorage.clear()
+      await window.localStorage.clear()
       setUser(null)
     } catch (exception) {
-      setErrorMessage('Logut failed')
-      setTimeout(() => {
-        setErrorMessage(null)
-      }, 5000)
+      handleError('Logut failed')
     }
+  }
+
+  const addNewBlog = async blog => {
+    try {
+      console.log(blog)
+      const newBlog = await blogService.create(blog)
+      setBlogs(blogs.concat(newBlog))
+    } catch (exception) {
+      handleError('Blog failed')
+    } 
   }
 
   const appStyle = {
@@ -83,9 +97,10 @@ const App = () => {
                      setUsername={setUsername}
                      setPassword={setPassword}
           />
-        : <BlogList blogs={blogs}
-                    name={user.name}
-                    handleLogout={handleLogout}
+        : <Blogs handleLogout={handleLogout}
+                 blogs={blogs}
+                 name={user.name}
+                 addNewBlog={addNewBlog}   
           />
       }
     </div>

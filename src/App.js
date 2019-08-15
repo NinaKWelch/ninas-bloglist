@@ -78,12 +78,23 @@ const App = () => {
   }
 
   const addNewBlog = async blog => {
-    try {
+    try {  
       const newBlog = await blogService.create(blog)
       setBlogs(blogs.concat(newBlog))
       handleMessage(`New Blog '${blog.title}' by ${blog.author} added`, 'success')
     } catch (exception) {
       handleMessage('Some information is missing', 'error')
+    } 
+  }
+
+  const updateBlog = async blog => {
+    const id = blog.id
+
+    try {
+      await blogService.update(id, blog)
+      handleMessage(`New like added for ${blog.title}`, 'success')
+    } catch (exception) {
+      handleMessage('Blog update unsuccessful', 'error')
     } 
   }
 
@@ -107,7 +118,8 @@ const App = () => {
         : <Blogs handleLogout={handleLogout}
                  blogs={blogs}
                  name={user.name}
-                 addNewBlog={addNewBlog}   
+                 addNewBlog={addNewBlog}
+                 updateBlog={updateBlog}
           />
       }
     </div>

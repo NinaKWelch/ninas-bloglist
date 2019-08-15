@@ -3,7 +3,7 @@ import Togglable from './Togglable'
 import BlogForm from './BlogForm'
 import BlogList from './BlogList'
 
-const Blogs = ({ handleLogout, blogs, name, addNewBlog }) => {
+const Blogs = ({ handleLogout, blogs, name, addNewBlog, updateBlog }) => {
   const blogForm = () => (
     <Togglable buttonLabel='Add new blog'>
       <BlogForm addNewBlog={addNewBlog} />
@@ -18,7 +18,7 @@ const Blogs = ({ handleLogout, blogs, name, addNewBlog }) => {
 
       {blogForm()}
 
-      <BlogList blogs={blogs} />
+      <BlogList blogs={blogs} updateBlog={updateBlog} />
     </div>
   )
 }

@@ -37,9 +37,8 @@ const App = () => {
       text,
       type
     }
-
+    
     setMessage(message)
-
     setTimeout(() => {
       setMessage(null)
     }, 5000)
@@ -99,11 +98,11 @@ const App = () => {
       <Notification message={message} />
       
       {user === null
-        ? <LoginForm handleLogin={handleLogin}
-                     username={username}
+        ? <LoginForm username={username}
                      password={password}
-                     setUsername={setUsername}
-                     setPassword={setPassword}
+                     handleUsernameChange={({ target }) => setUsername(target.value)}
+                     handlePasswordChange={({ target }) => setPassword(target.value)}
+                     handleSubmit={handleLogin}
           />
         : <Blogs handleLogout={handleLogout}
                  blogs={blogs}

@@ -1,9 +1,41 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const Blog = ({ blog }) => (
-  <li>
-    {blog.title}, {blog.author}
-  </li>
-)
+const Blog = ({ blog }) => {
+  const [visible, setVisible] = useState(false)
+
+  const toggleVisibility = () => {
+    setVisible(!visible)
+  }
+
+  const showWhenVisible = {
+    display: visible ? '' : 'none',
+    lineHeight: '1.5em',
+    backgroundColor: '#efefef',
+    padding: '5px 20px',
+    border: '1px solid #ccc'
+  }
+
+  const listItemStyle = {
+    marginTop: 10,
+    padding: 7,
+    border: '1px solid #ccc',
+
+  }
+
+  return (
+    <li>
+        <div onClick={toggleVisibility} style={listItemStyle}>
+          {blog.title}, {blog.author}
+        </div>
+
+        <div style={showWhenVisible}>
+          <p><strong>{blog.title}</strong><br/>
+          <a href={blog.url}>{blog.url}</a><br/>
+          {blog.likes} Likes <button>Like</button><br/>
+         <small>Added by {blog.author}</small></p>
+        </div>
+    </li>
+  )
+}
 
 export default Blog

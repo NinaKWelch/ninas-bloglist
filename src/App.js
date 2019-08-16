@@ -89,9 +89,10 @@ const App = () => {
 
   const updateBlog = async blog => {
     const id = blog.id
-
+    console.log(blog)
     try {
       await blogService.update(id, blog)
+      setBlogs(blogs.map(blog => blog.id === id ? {...blog, likes: blog.likes + 1} : blog))
       handleMessage(`New like added for ${blog.title}`, 'success')
     } catch (exception) {
       handleMessage('Blog update unsuccessful', 'error')

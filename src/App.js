@@ -78,21 +78,48 @@ const App = () => {
   }
 
   const addNewBlog = async blog => {
+    const currentUser = {
+      username: user.username
+    }
+    
     try {  
       const newBlog = await blogService.create(blog)
-      setBlogs(blogs.concat(newBlog))
-      handleMessage(`New Blog '${blog.title}' by ${blog.author} added`, 'success')
+      setBlogs(blogs.concat({...newBlog, user: currentUser}))
+      handleMessage(
+        `New Blog '${blog.title}' by ${blog.author} added`, 'success'
+      )
     } catch (exception) {
-      handleMessage('Some information is missing', 'error')
-    } 
+      handleMessage(
+        'Blog not added: some information may be missing or incorrect', 'error'
+      )
+    }
+  }
+
+  const deleteBlog = async blog => {
+    const id = blog.id
+    const confirmRemoveBlog = window.confirm(
+      `Remove '${blog.title}?' by ${blog.author}`
+    )
+
+    try {
+      if (confirmRemoveBlog) {
+        await blogService.remove(id)
+        handleMessage(`'${blog.title}' has been removed`, 'success')  
+        setBlogs(blogs.filter(blog => blog.id !== id))
+      }
+    } catch (exception) {
+      handleMessage('Blog not deleted', 'error')
+    }
   }
 
   const updateBlog = async blog => {
     const id = blog.id
-    console.log(blog)
+
     try {
       await blogService.update(id, blog)
-      setBlogs(blogs.map(blog => blog.id === id ? {...blog, likes: blog.likes + 1} : blog))
+      setBlogs(blogs.map(
+        blog => blog.id === id ? {...blog, likes: blog.likes + 1} : blog)
+      )
       handleMessage(`New like added for ${blog.title}`, 'success')
     } catch (exception) {
       handleMessage('Blog update unsuccessful', 'error')
@@ -118,9 +145,10 @@ const App = () => {
           />
         : <Blogs handleLogout={handleLogout}
                  blogs={blogs}
-                 name={user.name}
-                 addNewBlog={addNewBlog}
-                 updateBlog={updateBlog}
+                 user={user}
+                 handleBlogCreation={addNewBlog}
+                 handleBlogUpdate={updateBlog}
+                 handleBlogDeletion={deleteBlog}
           />
       }
     </div>

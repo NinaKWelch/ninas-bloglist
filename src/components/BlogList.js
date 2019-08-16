@@ -1,7 +1,12 @@
 import React from 'react'
 import Blog from './Blog'
 
-const BlogList = ({ blogs, updateBlog }) => {
+const BlogList = ({
+  blogs,
+  user,
+  handleBlogUpdate,
+  handleBlogDeletion
+}) => {
   const sortByMostLikes = blogs => {
     blogs.sort((a, b) => b.likes - a.likes)
     
@@ -9,7 +14,9 @@ const BlogList = ({ blogs, updateBlog }) => {
       blogs.map(blog => 
         <Blog key={blog.id} 
               blog={blog}
-              updateBlog={updateBlog}
+              user={user}
+              handleBlogUpdate={handleBlogUpdate}
+              handleBlogDeletion={handleBlogDeletion}
         />
       )
     )
@@ -21,6 +28,5 @@ const BlogList = ({ blogs, updateBlog }) => {
     </ul>
   )
 }
-
 
 export default BlogList

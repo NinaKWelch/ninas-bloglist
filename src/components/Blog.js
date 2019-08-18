@@ -42,11 +42,11 @@ const Blog = ({
 
   return (
     <li>
-      <div onClick={toggleVisibility} style={listItemStyle}>
+      <div onClick={toggleVisibility} style={listItemStyle} className='blog-list-item'>
         {blog.title}, {blog.author}
       </div>
 
-      <div style={showWhenVisible}>
+      <div style={showWhenVisible} className='blog-list-item-info'>
         <p>
           <strong>{blog.title}</strong><br/>
           <a href={blog.url}>{blog.url}</a><br/>

@@ -1,11 +1,11 @@
 import React from 'react'
 
-const LoginForm = ({ 
+const LoginForm = ({
   username,
   password,
   handleUsernameChange,
   handlePasswordChange,
-  handleSubmit 
+  handleSubmit
 }) => {
   return (
     <form onSubmit={handleSubmit}>
@@ -14,10 +14,11 @@ const LoginForm = ({
       <div>
         <label>
           Username:
-          <input type='text'
-                 value={username}
-                 name='Username'
-                 onChange={handleUsernameChange}
+          <input
+            type='text'
+            value={username}
+            name='Username'
+            onChange={handleUsernameChange}
           />
         </label>
       </div>
@@ -25,14 +26,15 @@ const LoginForm = ({
       <div>
         <label>
           Password:
-          <input type='text'
-                 value={password}
-                 name='Password'
-                 onChange={handlePasswordChange}
+          <input
+            type='text'
+            value={password}
+            name='Password'
+            onChange={handlePasswordChange}
           />
         </label>
       </div>
-      
+
       <button type='submit'>Login</button>
     </form>
   )

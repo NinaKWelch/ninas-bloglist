@@ -3,7 +3,7 @@ import Togglable from './Togglable'
 import BlogForm from './BlogForm'
 import BlogList from './BlogList'
 
-const Blogs = ({ 
+const Blogs = ({
   handleLogout,
   blogs,
   user,
@@ -22,10 +22,11 @@ const Blogs = ({
       <BlogForm handleBlogCreation={handleBlogCreation} />
     </Togglable>
 
-    <BlogList blogs={blogs}
-              user={user}
-              handleBlogUpdate={handleBlogUpdate}
-              handleBlogDeletion={handleBlogDeletion}
+    <BlogList
+      blogs={blogs}
+      user={user}
+      handleBlogUpdate={handleBlogUpdate}
+      handleBlogDeletion={handleBlogDeletion}
     />
   </div>
 )

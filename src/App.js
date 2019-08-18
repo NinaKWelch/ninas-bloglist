@@ -9,7 +9,7 @@ import Blogs from './components/Blogs'
 
 const App = () => {
   const [message, setMessage] = useState(null)
-  const [username, setUsername] = useState('') 
+  const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
   const [blogs, setBlogs] = useState([])
@@ -24,7 +24,7 @@ const App = () => {
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBloglistUser')
-    
+
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
@@ -37,7 +37,7 @@ const App = () => {
       text,
       type
     }
-    
+
     setMessage(message)
     setTimeout(() => {
       setMessage(null)
@@ -49,7 +49,7 @@ const App = () => {
 
     try {
       const user = await loginService.login({
-        username, 
+        username,
         password
       })
 
@@ -81,10 +81,10 @@ const App = () => {
     const currentUser = {
       username: user.username
     }
-    
-    try {  
+
+    try {
       const newBlog = await blogService.create(blog)
-      setBlogs(blogs.concat({...newBlog, user: currentUser}))
+      setBlogs(blogs.concat({ ...newBlog, user: currentUser }))
       handleMessage(
         `New Blog '${blog.title}' by ${blog.author} added`, 'success'
       )
@@ -104,7 +104,7 @@ const App = () => {
     try {
       if (confirmRemoveBlog) {
         await blogService.remove(id)
-        handleMessage(`'${blog.title}' has been removed`, 'success')  
+        handleMessage(`'${blog.title}' has been removed`, 'success')
         setBlogs(blogs.filter(blog => blog.id !== id))
       }
     } catch (exception) {
@@ -118,12 +118,12 @@ const App = () => {
     try {
       await blogService.update(id, blog)
       setBlogs(blogs.map(
-        blog => blog.id === id ? {...blog, likes: blog.likes + 1} : blog)
+        blog => blog.id === id ? { ...blog, likes: blog.likes + 1 } : blog)
       )
       handleMessage(`New like added for ${blog.title}`, 'success')
     } catch (exception) {
       handleMessage('Blog update unsuccessful', 'error')
-    } 
+    }
   }
 
   const appStyle = {
@@ -135,21 +135,23 @@ const App = () => {
   return (
     <div style={appStyle}>
       <Notification message={message} />
-      
-      {user === null
-        ? <LoginForm username={username}
-                     password={password}
-                     handleUsernameChange={({ target }) => setUsername(target.value)}
-                     handlePasswordChange={({ target }) => setPassword(target.value)}
-                     handleSubmit={handleLogin}
-          />
-        : <Blogs handleLogout={handleLogout}
-                 blogs={blogs}
-                 user={user}
-                 handleBlogCreation={addNewBlog}
-                 handleBlogUpdate={updateBlog}
-                 handleBlogDeletion={deleteBlog}
-          />
+
+      {user === null ?
+        <LoginForm
+          username={username}
+          password={password}
+          handleUsernameChange={({ target }) => setUsername(target.value)}
+          handlePasswordChange={({ target }) => setPassword(target.value)}
+          handleSubmit={handleLogin}
+        /> :
+        <Blogs
+          handleLogout={handleLogout}
+          blogs={blogs}
+          user={user}
+          handleBlogCreation={addNewBlog}
+          handleBlogUpdate={updateBlog}
+          handleBlogDeletion={deleteBlog}
+        />
       }
     </div>
   )

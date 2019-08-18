@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 const BlogForm = ({ handleBlogCreation }) => {
-  const [title, setTitle] = useState('') 
+  const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
 
@@ -28,10 +28,11 @@ const BlogForm = ({ handleBlogCreation }) => {
         <div>
           <label>
             Title:
-            <input type='text'
-                   value={title}
-                   name='Title'
-                   onChange={({ target }) => setTitle(target.value)}
+            <input
+              type='text'
+              value={title}
+              name='Title'
+              onChange={({ target }) => setTitle(target.value)}
             />
           </label>
         </div>
@@ -39,10 +40,11 @@ const BlogForm = ({ handleBlogCreation }) => {
         <div>
           <label>
             Author:
-            <input type='text'
-                   value={author}
-                   name='Author'
-                   onChange={({ target }) => setAuthor(target.value)}
+            <input
+              type='text'
+              value={author}
+              name='Author'
+              onChange={({ target }) => setAuthor(target.value)}
             />
           </label>
         </div>
@@ -50,12 +52,13 @@ const BlogForm = ({ handleBlogCreation }) => {
         <div>
           <label>
             Url:
-            <input type='url'
-                  value={url}
-                  name='Url'
-                  onChange={({ target }) => setUrl(target.value)}
+            <input
+              type='url'
+              value={url}
+              name='Url'
+              onChange={({ target }) => setUrl(target.value)}
             />
-            </label>
+          </label>
         </div>
 
         <button type='submit'>Create</button>

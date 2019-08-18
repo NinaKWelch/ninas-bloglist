@@ -18,7 +18,7 @@ const Blog = ({
       likes: blog.likes + 1,
       user: blog.user.id
     }
-    
+
     handleBlogUpdate(updatedBlog)
   }
 
@@ -42,9 +42,9 @@ const Blog = ({
 
   return (
     <li>
-        <div onClick={toggleVisibility} style={listItemStyle}>
-          {blog.title}, {blog.author}
-        </div>
+      <div onClick={toggleVisibility} style={listItemStyle}>
+        {blog.title}, {blog.author}
+      </div>
 
       <div style={showWhenVisible}>
         <p>

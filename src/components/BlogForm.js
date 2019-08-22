@@ -1,38 +1,37 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useField } from '../hooks'
 
 const BlogForm = ({ handleBlogCreation }) => {
-  const [title, setTitle] = useState('')
-  const [author, setAuthor] = useState('')
-  const [url, setUrl] = useState('')
+  const title = useField('text')
+  const author = useField('text')
+  const url = useField('url')
 
   const addBlog = event => {
     event.preventDefault()
 
     const blog = {
-      title,
-      author,
-      url
+      title: title.field.value,
+      author: author.field.value,
+      url: url.field.value
     }
 
     handleBlogCreation(blog)
-    setTitle('')
-    setAuthor('')
-    setUrl('')
+    title.reset()
+    author.reset()
+    url.reset()
   }
 
   return (
     <div>
       <h3>Create New</h3>
 
-      <form onSubmit={addBlog}>
+      <form onSubmit={addBlog} id='new-note-form'>
         <div>
           <label>
             Title:
             <input
-              type='text'
-              value={title}
+              {...title.field}
               name='Title'
-              onChange={({ target }) => setTitle(target.value)}
             />
           </label>
         </div>
@@ -41,10 +40,8 @@ const BlogForm = ({ handleBlogCreation }) => {
           <label>
             Author:
             <input
-              type='text'
-              value={author}
+              {...author.field}
               name='Author'
-              onChange={({ target }) => setAuthor(target.value)}
             />
           </label>
         </div>
@@ -53,10 +50,8 @@ const BlogForm = ({ handleBlogCreation }) => {
           <label>
             Url:
             <input
-              type='url'
-              value={url}
+              {...url.field}
               name='Url'
-              onChange={({ target }) => setUrl(target.value)}
             />
           </label>
         </div>

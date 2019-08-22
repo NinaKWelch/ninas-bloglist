@@ -3,8 +3,6 @@ import React from 'react'
 const LoginForm = ({
   username,
   password,
-  handleUsernameChange,
-  handlePasswordChange,
   handleSubmit
 }) => {
   return (
@@ -15,10 +13,8 @@ const LoginForm = ({
         <label>
           Username:
           <input
-            type='text'
-            value={username}
+            {...username}
             name='Username'
-            onChange={handleUsernameChange}
           />
         </label>
       </div>
@@ -27,10 +23,8 @@ const LoginForm = ({
         <label>
           Password:
           <input
-            type='text'
-            value={password}
+            {...password}
             name='Password'
-            onChange={handlePasswordChange}
           />
         </label>
       </div>

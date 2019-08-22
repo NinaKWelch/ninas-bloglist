@@ -7,10 +7,13 @@ import Notification from './components/Notification'
 import LoginForm from './components/LoginForm'
 import Blogs from './components/Blogs'
 
+import  { useField } from './hooks'
+
 const App = () => {
+  const username = useField('text')
+  const password = useField('password')
+
   const [message, setMessage] = useState(null)
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
   const [blogs, setBlogs] = useState([])
 
@@ -49,8 +52,8 @@ const App = () => {
 
     try {
       const user = await loginService.login({
-        username,
-        password
+        username: username.field.value,
+        password: password.field.value
       })
 
       window.localStorage.setItem(
@@ -59,8 +62,8 @@ const App = () => {
 
       blogService.setToken(user.token)
       setUser(user)
-      setUsername('')
-      setPassword('')
+      username.reset()
+      password.reset()
       handleMessage(`Logged in as ${user.name}`, 'success')
     } catch (exception) {
       handleMessage('Check username and password', 'error')
@@ -138,10 +141,8 @@ const App = () => {
 
       {user === null ?
         <LoginForm
-          username={username}
-          password={password}
-          handleUsernameChange={({ target }) => setUsername(target.value)}
-          handlePasswordChange={({ target }) => setPassword(target.value)}
+          username={username.field}
+          password={password.field}
           handleSubmit={handleLogin}
         /> :
         <Blogs

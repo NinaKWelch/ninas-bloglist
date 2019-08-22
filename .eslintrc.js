@@ -22,6 +22,7 @@ module.exports = {
   },
   "plugins": [
     "react",
+    "react-hooks",
     "jest"
   ],
   "rules": {
@@ -54,6 +55,7 @@ module.exports = {
         }
     ],
     "no-console": 0,
-    "react/prop-types": 0
+    "react/prop-types": 0,
+    "react-hooks/rules-of-hooks": "error"
   }
 };

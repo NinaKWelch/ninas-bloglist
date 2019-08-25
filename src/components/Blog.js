@@ -13,13 +13,11 @@ const Blog = ({
   }
 
   const addLikes = blog => {
-    const updatedBlog = {
+    handleBlogUpdate({
       ...blog,
       likes: blog.likes + 1,
       user: blog.user.id
-    }
-
-    handleBlogUpdate(updatedBlog)
+    })
   }
 
   const showWhenVisible = {

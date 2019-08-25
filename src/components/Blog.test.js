@@ -26,18 +26,18 @@ describe('<Blog />', () => {
     )
   })
 
-  test('renders the blog name and author', () => {
+  test('renders the blog title and author', () => {
     expect(component.container).toHaveTextContent(
       'Peter\'s Blog, Peter'
     )
   })
 
-  test('at start the other information is hidden', () => {
+  test('initially the additional information is hidden', () => {
     const div = component.container.querySelector('.blog-list-item-info')
     expect(div).toHaveStyle('display: none')
   })
 
-  test('clicking the blog name, the other information becomes visible', () => {
+  test('additional information becomes visible by clicking on the blog titile', () => {
     const listItem = component.container.querySelector('.blog-list-item')
     fireEvent.click(listItem)
 

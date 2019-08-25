@@ -5,9 +5,9 @@ const Notification = ({ message }) => {
     return null
   }
 
-  const messageStyle = message.type !== 'error'
-    ? { border: '1px solid green', color: 'green', padding: 5 }
-    : { border: '1px solid red', color: 'red', padding: 5 }
+  const messageStyle = message.type !== 'error' ?
+    { border: '1px solid green', color: 'green', padding: 5 } :
+    { border: '1px solid red', color: 'red', padding: 5 }
 
   return (
     <div style={messageStyle}>

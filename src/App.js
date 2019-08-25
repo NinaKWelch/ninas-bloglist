@@ -107,8 +107,8 @@ const App = () => {
     try {
       if (confirmRemoveBlog) {
         await blogService.remove(id)
-        handleMessage(`'${blog.title}' has been removed`, 'success')
         setBlogs(blogs.filter(blog => blog.id !== id))
+        handleMessage(`'${blog.title}' has been removed`, 'success')
       }
     } catch (exception) {
       handleMessage('Blog not deleted', 'error')

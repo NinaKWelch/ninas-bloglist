@@ -21,7 +21,7 @@ describe('<App />', () => {
       () => component.getByText('Login')
     )
 
-    expect(component.container).toHaveTextContent( 'Login to Bloglist')
+    expect(component.container).toHaveTextContent('Login to Bloglist')
 
     const blogs = component.container.querySelectorAll('.blog-list-item')
     expect(blogs.length).toBe(0)
@@ -40,17 +40,13 @@ describe('<App />', () => {
         () => component.container.querySelector('.blog-list-item')
       )
 
-      expect(component.container).toHaveTextContent('Blogs')
+      expect(component.container).not.toHaveTextContent('Login to Bloglist')
 
       const blogs = component.container.querySelectorAll('.blog-list-item')
       expect(blogs.length).toBe(2)
 
-      expect(component.container).toHaveTextContent(
-        'Peter\'s Blog'
-      )
-      expect(component.container).toHaveTextContent(
-        'Nina\'s Blog'
-      )
+      expect(component.container).toHaveTextContent('Peter\'s Blog')
+      expect(component.container).toHaveTextContent('Nina\'s Blog')
     })
   })
 })

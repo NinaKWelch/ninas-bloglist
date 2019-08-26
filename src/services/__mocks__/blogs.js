@@ -25,15 +25,19 @@ const blogs = [
   }
 ]
 
-// eslint-disable-next-line no-unused-vars
-let token = null
-
 const getAll = () => {
   return Promise.resolve(blogs)
 }
 
+/*
+let token = null
+
 const setToken = newToken => {
   token = `bearer ${newToken}`
 }
+*/
+
+const setToken = () => {}
+
 
 export default { getAll, setToken }

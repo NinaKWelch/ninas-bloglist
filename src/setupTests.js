@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom/extend-expect'
 
+/*
 let savedItems = {}
 
 const localStorageMock = {
@@ -11,3 +12,4 @@ const localStorageMock = {
 }
 
 Object.defineProperty(window, 'localStorage', { value: localStorageMock })
+*/

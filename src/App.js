@@ -10,8 +10,8 @@ import Blogs from './components/Blogs'
 import  { useField } from './hooks'
 
 const App = () => {
-  const username = useField('text')
-  const password = useField('password')
+  const [username] = useField('text')
+  const [password] = useField('password')
 
   const [message, setMessage] = useState(null)
   const [user, setUser] = useState(null)
@@ -52,8 +52,8 @@ const App = () => {
 
     try {
       const user = await loginService.login({
-        username: username.field.value,
-        password: password.field.value
+        username: username.value,
+        password: password.value
       })
 
       window.localStorage.setItem(
@@ -62,8 +62,6 @@ const App = () => {
 
       blogService.setToken(user.token)
       setUser(user)
-      username.reset()
-      password.reset()
       handleMessage(`Logged in as ${user.name}`, 'success')
     } catch (exception) {
       handleMessage('Check username and password', 'error')
@@ -72,8 +70,9 @@ const App = () => {
 
   const handleLogout = async () => {
     try {
-      await window.localStorage.clear()
       setUser(null)
+      blogService.destroyToken()
+      await window.localStorage.removeItem('loggedBloglistUser')
       handleMessage(`${user.name} logged out`, 'success')
     } catch (exception) {
       handleMessage('Logout error', 'error')
@@ -116,13 +115,13 @@ const App = () => {
   }
 
   const updateBlog = async blog => {
+    const likedBlog = { ...blog, likes: blog.likes + 1 }
     const id = blog.id
 
     try {
-      await blogService.update(id, blog)
-      setBlogs(blogs.map(
-        blog => blog.id === id ? { ...blog, likes: blog.likes + 1 } : blog)
-      )
+      const updatedBlog = await blogService.update(likedBlog)
+
+      setBlogs(blogs.map(blog => blog.id === id ? updatedBlog : blog))
       handleMessage(`New like added for ${blog.title}`, 'success')
     } catch (exception) {
       handleMessage('Blog update unsuccessful', 'error')
@@ -141,8 +140,8 @@ const App = () => {
 
       {user === null ?
         <LoginForm
-          username={username.field}
-          password={password.field}
+          username={username}
+          password={password}
           handleSubmit={handleLogin}
         /> :
         <Blogs

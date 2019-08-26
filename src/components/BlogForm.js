@@ -2,23 +2,21 @@ import React from 'react'
 import { useField } from '../hooks'
 
 const BlogForm = ({ handleBlogCreation }) => {
-  const title = useField('text')
-  const author = useField('text')
-  const url = useField('url')
+  const [title, titleReset] = useField('text')
+  const [author, authorReset] = useField('text')
+  const [url, urlReset] = useField('text')
 
   const addBlog = event => {
     event.preventDefault()
+    handleBlogCreation({
+      title: title.value,
+      author: author.value,
+      url: url.value
+    })
 
-    const blog = {
-      title: title.field.value,
-      author: author.field.value,
-      url: url.field.value
-    }
-
-    handleBlogCreation(blog)
-    title.reset()
-    author.reset()
-    url.reset()
+    titleReset()
+    authorReset()
+    urlReset()
   }
 
   return (
@@ -30,7 +28,7 @@ const BlogForm = ({ handleBlogCreation }) => {
           <label>
             Title:
             <input
-              {...title.field}
+              {...title}
               name='Title'
             />
           </label>
@@ -40,7 +38,7 @@ const BlogForm = ({ handleBlogCreation }) => {
           <label>
             Author:
             <input
-              {...author.field}
+              {...author}
               name='Author'
             />
           </label>
@@ -50,7 +48,7 @@ const BlogForm = ({ handleBlogCreation }) => {
           <label>
             Url:
             <input
-              {...url.field}
+              {...url}
               name='Url'
             />
           </label>

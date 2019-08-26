@@ -15,7 +15,6 @@ const Blog = ({
   const addLikes = blog => {
     handleBlogUpdate({
       ...blog,
-      likes: blog.likes + 1,
       user: blog.user.id
     })
   }
@@ -49,7 +48,7 @@ const Blog = ({
           <strong>{blog.title}</strong><br/>
           <a href={blog.url}>{blog.url}</a><br/>
           {blog.likes} Likes <button onClick={() => addLikes(blog)}>Like</button><br/>
-          <small>Added by {blog.author}</small><br/>
+          <small>Added by {blog.user.name}</small><br/>
           <button onClick={() => handleBlogDeletion(blog)} style={buttonStyle}>Remove</button>
         </p>
       </div>

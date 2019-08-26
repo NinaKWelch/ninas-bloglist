@@ -7,6 +7,7 @@ describe('<Blog />', () => {
     title: 'Peter\'s Blog',
     author: 'Peter',
     likes: 2,
+    url: 'http://peter.com',
     user: {
       username: 'root'
     }
@@ -21,18 +22,17 @@ describe('<Blog />', () => {
   beforeEach(() => {
     const mockHandler = jest.fn()
 
-    component = render(
-      <Blog blog={blog} user={user} onClick={mockHandler} />
-    )
+    component = render(<Blog
+      blog={blog}
+      user={user}
+      onClick={mockHandler}
+    />)
   })
 
   test('renders the blog title and author', () => {
-    expect(component.container).toHaveTextContent(
-      'Peter\'s Blog, Peter'
-    )
-  })
+    expect(component.container).toHaveTextContent(blog.title)
+    expect(component.container).toHaveTextContent(blog.author)
 
-  test('initially the additional information is hidden', () => {
     const div = component.container.querySelector('.blog-list-item-info')
     expect(div).toHaveStyle('display: none')
   })

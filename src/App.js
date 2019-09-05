@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
+import { setNotification } from './reducers/notificationReducer'
 
 import loginService from './services/login'
 import blogService from './services/blogs'
@@ -9,11 +11,10 @@ import Blogs from './components/Blogs'
 
 import  { useField } from './hooks'
 
-const App = () => {
+const App = props => {
   const [username] = useField('text')
   const [password] = useField('password')
 
-  const [message, setMessage] = useState(null)
   const [user, setUser] = useState(null)
   const [blogs, setBlogs] = useState([])
 
@@ -35,18 +36,6 @@ const App = () => {
     }
   }, [])
 
-  const handleMessage = (text, type) => {
-    const message = {
-      text,
-      type
-    }
-
-    setMessage(message)
-    setTimeout(() => {
-      setMessage(null)
-    }, 5000)
-  }
-
   const handleLogin = async event => {
     event.preventDefault()
 
@@ -62,9 +51,9 @@ const App = () => {
 
       blogService.setToken(user.token)
       setUser(user)
-      handleMessage(`Logged in as ${user.name}`, 'success')
+      props.setNotification(`Logged in as ${user.name}`)
     } catch (exception) {
-      handleMessage('Check username and password', 'error')
+      props.setNotification('Check username and password')
     }
   }
 
@@ -73,9 +62,9 @@ const App = () => {
       setUser(null)
       blogService.destroyToken()
       await window.localStorage.removeItem('loggedBloglistUser')
-      handleMessage(`${user.name} logged out`, 'success')
+      props.setNotification(`${user.name} logged out`)
     } catch (exception) {
-      handleMessage('Logout error', 'error')
+      props.setNotification('Logout error')
     }
   }
 
@@ -87,13 +76,9 @@ const App = () => {
     try {
       const newBlog = await blogService.create(blog)
       setBlogs(blogs.concat({ ...newBlog, user: currentUser }))
-      handleMessage(
-        `New Blog '${blog.title}' by ${blog.author} added`, 'success'
-      )
+      props.setNotification(`New Blog '${blog.title}' by ${blog.author} added`)
     } catch (exception) {
-      handleMessage(
-        'Blog not added: some information may be missing or incorrect', 'error'
-      )
+      props.setNotification('Blog not added: some information may be missing or incorrect')
     }
   }
 
@@ -107,10 +92,10 @@ const App = () => {
       if (confirmRemoveBlog) {
         await blogService.remove(id)
         setBlogs(blogs.filter(blog => blog.id !== id))
-        handleMessage(`'${blog.title}' has been removed`, 'success')
+        props.setNotification(`'${blog.title}' has been removed`)
       }
     } catch (exception) {
-      handleMessage('Blog not deleted', 'error')
+      props.setNotification('Blog not deleted')
     }
   }
 
@@ -122,9 +107,9 @@ const App = () => {
       const updatedBlog = await blogService.update(likedBlog)
 
       setBlogs(blogs.map(blog => blog.id === id ? updatedBlog : blog))
-      handleMessage(`New like added for ${blog.title}`, 'success')
+      props.setNotification(`New like added for ${blog.title}`)
     } catch (exception) {
-      handleMessage('Blog update unsuccessful', 'error')
+      props.setNotification('Blog update unsuccessful')
     }
   }
 
@@ -136,7 +121,7 @@ const App = () => {
 
   return (
     <div style={appStyle}>
-      <Notification message={message} />
+      <Notification />
 
       {user === null ?
         <LoginForm
@@ -157,4 +142,7 @@ const App = () => {
   )
 }
 
-export default App
+export default connect(
+  null,
+  { setNotification }
+)(App)

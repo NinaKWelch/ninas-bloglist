@@ -31,7 +31,8 @@ const remove = async id => {
 }
 
 const update = async newObject => {
-  const response = await axios.put(`${baseUrl}/${newObject.id}`, newObject, getConfig())
+  const object = { ...newObject, likes: newObject.likes + 1 }
+  const response = await axios.put(`${baseUrl}/${newObject.id}`, object, getConfig())
   return response.data
 }
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
+import { initializeBlogs } from './reducers/blogReducer'
 import { setNotification } from './reducers/notificationReducer'
 
 import loginService from './services/login'
@@ -16,15 +17,12 @@ const App = props => {
   const [password] = useField('password')
 
   const [user, setUser] = useState(null)
-  const [blogs, setBlogs] = useState([])
 
   useEffect(() => {
-    blogService
-      .getAll()
-      .then(initialBlogs => {
-        setBlogs(initialBlogs)
-      })
-  }, [])
+    props.initializeBlogs()
+  }, [props])
+
+  const blogs = props.blogs
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBloglistUser')
@@ -75,41 +73,11 @@ const App = props => {
 
     try {
       const newBlog = await blogService.create(blog)
-      setBlogs(blogs.concat({ ...newBlog, user: currentUser }))
+      blogs.concat({ ...newBlog, user: currentUser })
+      //setBlogs(blogs.concat({ ...newBlog, user: currentUser }))
       props.setNotification(`New Blog '${blog.title}' by ${blog.author} added`)
     } catch (exception) {
       props.setNotification('Blog not added: some information may be missing or incorrect')
-    }
-  }
-
-  const deleteBlog = async blog => {
-    const id = blog.id
-    const confirmRemoveBlog = window.confirm(
-      `Remove '${blog.title}?' by ${blog.author}`
-    )
-
-    try {
-      if (confirmRemoveBlog) {
-        await blogService.remove(id)
-        setBlogs(blogs.filter(blog => blog.id !== id))
-        props.setNotification(`'${blog.title}' has been removed`)
-      }
-    } catch (exception) {
-      props.setNotification('Blog not deleted')
-    }
-  }
-
-  const updateBlog = async blog => {
-    const likedBlog = { ...blog, likes: blog.likes + 1 }
-    const id = blog.id
-
-    try {
-      const updatedBlog = await blogService.update(likedBlog)
-
-      setBlogs(blogs.map(blog => blog.id === id ? updatedBlog : blog))
-      props.setNotification(`New like added for ${blog.title}`)
-    } catch (exception) {
-      props.setNotification('Blog update unsuccessful')
     }
   }
 
@@ -131,18 +99,20 @@ const App = props => {
         /> :
         <Blogs
           handleLogout={handleLogout}
-          blogs={blogs}
           user={user}
           handleBlogCreation={addNewBlog}
-          handleBlogUpdate={updateBlog}
-          handleBlogDeletion={deleteBlog}
         />
       }
     </div>
   )
 }
 
+const mapDispatchToProps = {
+  initializeBlogs,
+  setNotification
+}
+
 export default connect(
   null,
-  { setNotification }
+  mapDispatchToProps
 )(App)

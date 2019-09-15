@@ -5,7 +5,6 @@ import BlogList from './BlogList'
 
 const Blogs = ({
   handleLogout,
-  blogs,
   user,
   handleBlogCreation
 }) => (
@@ -21,7 +20,6 @@ const Blogs = ({
     </Togglable>
 
     <BlogList
-      blogs={blogs}
       user={user}
     />
   </div>

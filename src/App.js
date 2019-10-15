@@ -13,6 +13,7 @@ import Notification from './components/Notification'
 import LoginForm from './components/LoginForm'
 import Blogs from './components/Blogs'
 import Users from './components/Users'
+import User from './components/User'
 
 import  { useField } from './hooks'
 
@@ -69,6 +70,10 @@ const App = props => {
     props.setNotification(`New Blog '${blog.title}' by ${blog.author} added`)
   }
 
+  const userById = id => {
+    return props.users.find(user => user.id === id)
+  }
+
   const appStyle = {
     boxSizing: 'border-box',
     width: '80%',
@@ -98,9 +103,14 @@ const App = props => {
                 <Blogs handleBlogCreation={addNewBlog}
                 />
               } />
-              <Route path="/users" render={() =>
+
+              <Route exact path="/users" render={() =>
                 <Users users={props.users} />
               } />
+
+              <Route exact path="/users/:id" render={({ match }) =>
+                <User user={userById(match.params.id)} />}
+              />
             </div>
           </Router>
         </div>

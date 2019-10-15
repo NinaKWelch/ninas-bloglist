@@ -6,6 +6,8 @@ const reducer = (state = [], action) => {
   switch(action.type) {
   case 'INIT_BLOGS':
     return action.data
+  case 'CREATE_BLOG':
+    return state.concat(action.data)
   case 'DELETE_BLOG':
     return state.filter(blog => blog.id !== action.data)
   case 'UPDATE_BLOG': {
@@ -31,6 +33,16 @@ export const initializeBlogs = () => {
     dispatch({
       type: 'INIT_BLOGS',
       data: blogs
+    })
+  }
+}
+
+export const createBlog = (blog, user) => {
+  return async dispatch => {
+    const newBlog = await blogService.create(blog)
+    dispatch({
+      type: 'CREATE_BLOG',
+      data: { ...newBlog, user: user }
     })
   }
 }

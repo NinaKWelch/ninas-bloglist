@@ -1,36 +1,42 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { initializeBlogs } from './reducers/blogReducer'
-import { initializeUser, loginUser, logoutUser } from './reducers/loginReducer'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+
+import { initializeBlogs, createBlog } from './reducers/blogReducer'
+import { initializeUsers } from './reducers/userReducer'
+import {  initializeUser, loginUser, logoutUser } from './reducers/loginReducer'
 import { setNotification } from './reducers/notificationReducer'
 
 import loginService from './services/login'
-import blogService from './services/blogs'
 
 import Notification from './components/Notification'
 import LoginForm from './components/LoginForm'
 import Blogs from './components/Blogs'
+import Users from './components/Users'
 
 import  { useField } from './hooks'
 
 const App = props => {
   const [username] = useField('text')
   const [password] = useField('password')
+  const { initializeBlogs, initializeUsers, initializeUser } = props
 
   useEffect(() => {
-    props.initializeBlogs()
-  }, [])
+    initializeBlogs()
+  }, [initializeBlogs])
+
+  useEffect(() => {
+    initializeUsers()
+  }, [initializeUsers])
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBloglistUser')
 
     if (loggedUserJSON) {
       let user = JSON.parse(loggedUserJSON)
-      props.initializeUser(user)
+      initializeUser(user)
     }
-  }, [])
-
-  console.log(props.user)
+  }, [initializeUser])
 
   const handleLogin = async event => {
     event.preventDefault()
@@ -53,18 +59,14 @@ const App = props => {
     props.setNotification(`${props.user.name} logged out`)
   }
 
-  const addNewBlog = async blog => {
-    const currentUser = {
+  const addNewBlog = blog => {
+    let user = {
+      name: props.user.name,
       username: props.user.username
     }
 
-    try {
-      const newBlog = await blogService.create(blog)
-      props.blogs.concat({ ...newBlog, user: currentUser })
-      props.setNotification(`New Blog '${blog.title}' by ${blog.author} added`)
-    } catch (exception) {
-      props.setNotification('Blog not added: some information may be missing or incorrect')
-    }
+    props.createBlog(blog, user)
+    props.setNotification(`New Blog '${blog.title}' by ${blog.author} added`)
   }
 
   const appStyle = {
@@ -83,11 +85,25 @@ const App = props => {
           password={password}
           handleSubmit={handleLogin}
         /> :
-        <Blogs
-          handleLogout={handleLogout}
-          user={props.user}
-          handleBlogCreation={addNewBlog}
-        />
+        <div>
+          <h2>Blogs</h2>
+
+          <div>
+            {props.user.name} logged in <button onClick={handleLogout}>Logout</button>
+          </div>
+
+          <Router>
+            <div>
+              <Route exact path="/" render={() =>
+                <Blogs handleBlogCreation={addNewBlog}
+                />
+              } />
+              <Route path="/users" render={() =>
+                <Users users={props.users} />
+              } />
+            </div>
+          </Router>
+        </div>
       }
     </div>
   )
@@ -96,12 +112,15 @@ const App = props => {
 const mapStateToProps = state => {
   return {
     user: state.user,
+    users: state.users,
     blogs: state.blogs
   }
 }
 
 const mapDispatchToProps = {
   initializeBlogs,
+  createBlog,
+  initializeUsers,
   initializeUser,
   loginUser,
   logoutUser,

@@ -4,11 +4,7 @@ import { deleteBlog, updateBlog } from '../reducers/blogReducer'
 import { setNotification } from '../reducers/notificationReducer'
 import Blog from './Blog'
 
-const BlogList = (props/*{
-  blogs,
-  user
-}*/) => {
-
+const BlogList = props => {
   const handleBlogDeletion = blog => {
     const confirmRemoveBlog = window.confirm(
       `Remove '${blog.title}?' by ${blog.author}`
@@ -27,6 +23,7 @@ const BlogList = (props/*{
 
   const sortByMostLikes = blogs => {
     blogs.sort((a, b) => b.likes - a.likes)
+    console.log(blogs)
 
     return (
       props.blogs.map(blog =>
@@ -50,6 +47,7 @@ const BlogList = (props/*{
 
 const mapStateToProps = state => {
   return {
+    user: state.user,
     blogs: state.blogs
   }
 }

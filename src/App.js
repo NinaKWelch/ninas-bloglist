@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 import { initializeBlogs, createBlog } from './reducers/blogReducer'
 import { initializeUsers } from './reducers/userReducer'
@@ -79,14 +79,8 @@ const App = props => {
     return props.blogs.find(blog => blog.id === id)
   }
 
-  const appStyle = {
-    boxSizing: 'border-box',
-    width: '80%',
-    margin: '0 auto'
-  }
-
   return (
-    <div style={appStyle}>
+    <div>
       <Notification />
 
       {props.user === null ?
@@ -96,30 +90,32 @@ const App = props => {
           handleSubmit={handleLogin}
         /> :
         <div>
-          <h2>Blogs</h2>
-
-          <div>
-            {props.user.name} logged in <button onClick={handleLogout}>Logout</button>
-          </div>
-
           <Router>
+            <div style={{ background: 'lightgray', padding: '10px 5px' }}>
+              <Link to='/' style={{ paddingRight: 10 }}>Blogs</Link>
+              <Link to='/users' style={{ paddingRight: 10 }}>Users</Link>
+              <span>
+                {props.user.name} logged in <button onClick={handleLogout}>Logout</button>
+              </span>
+            </div>
+
             <div>
-              <Route exact path="/" render={() =>
+              <Route exact path='/' render={() =>
                 <Blogs
                   handleBlogCreation={addNewBlog}
                   blogs={props.blogs}
                 />
               } />
 
-              <Route exact path="/users" render={() =>
+              <Route exact path='/users' render={() =>
                 <Users users={props.users} />
               } />
 
-              <Route exact path="/users/:id" render={({ match }) =>
+              <Route exact path='/users/:id' render={({ match }) =>
                 <User user={userById(match.params.id)} />}
               />
 
-              <Route exact path="/blogs/:id" render={({ match }) =>
+              <Route exact path='/blogs/:id' render={({ match }) =>
                 <Blog blog={blogById(match.params.id)} user={props.user} />}
               />
             </div>

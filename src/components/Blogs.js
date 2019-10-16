@@ -3,13 +3,13 @@ import Togglable from './Togglable'
 import BlogForm from './BlogForm'
 import BlogList from './BlogList'
 
-const Blogs = ({ handleBlogCreation }) => (
+const Blogs = ({ handleBlogCreation, blogs }) => (
   <div>
     <Togglable buttonLabel='Add new blog'>
       <BlogForm handleBlogCreation={handleBlogCreation} />
     </Togglable>
 
-    <BlogList />
+    <BlogList blogs={blogs} />
   </div>
 )
 

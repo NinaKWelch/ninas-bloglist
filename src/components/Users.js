@@ -2,18 +2,16 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Users = ({ users }) => {
-  const userStats = users => {
-    return (
-      users.map(user =>
-        <tr key={user.id}>
-          <td style={{ paddingRight: 20 }}>
-            <Link to={`/users/${user.id}`}>{user.name}</Link>
-          </td>
-          <td>{user.blogs.length}</td>
-        </tr>
-      )
+  const userStats = users => (
+    users.map(user =>
+      <tr key={user.id}>
+        <td style={{ paddingRight: 20 }}>
+          <Link to={`/users/${user.id}`}>{user.name}</Link>
+        </td>
+        <td>{user.blogs.length}</td>
+      </tr>
     )
-  }
+  )
 
   return (
     <div>

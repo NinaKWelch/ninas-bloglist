@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import { initializeBlogs, createBlog } from './reducers/blogReducer'
 import { initializeUsers } from './reducers/userReducer'
-import {  initializeUser, loginUser, logoutUser } from './reducers/loginReducer'
+import { initializeUser, loginUser, logoutUser } from './reducers/loginReducer'
 import { setNotification } from './reducers/notificationReducer'
 
 import loginService from './services/login'
@@ -12,6 +12,7 @@ import loginService from './services/login'
 import Notification from './components/Notification'
 import LoginForm from './components/LoginForm'
 import Blogs from './components/Blogs'
+import Blog from './components/Blog'
 import Users from './components/Users'
 import User from './components/User'
 
@@ -74,6 +75,10 @@ const App = props => {
     return props.users.find(user => user.id === id)
   }
 
+  const blogById = id => {
+    return props.blogs.find(blog => blog.id === id)
+  }
+
   const appStyle = {
     boxSizing: 'border-box',
     width: '80%',
@@ -100,7 +105,9 @@ const App = props => {
           <Router>
             <div>
               <Route exact path="/" render={() =>
-                <Blogs handleBlogCreation={addNewBlog}
+                <Blogs
+                  handleBlogCreation={addNewBlog}
+                  blogs={props.blogs}
                 />
               } />
 
@@ -110,6 +117,10 @@ const App = props => {
 
               <Route exact path="/users/:id" render={({ match }) =>
                 <User user={userById(match.params.id)} />}
+              />
+
+              <Route exact path="/blogs/:id" render={({ match }) =>
+                <Blog blog={blogById(match.params.id)} user={props.user} />}
               />
             </div>
           </Router>

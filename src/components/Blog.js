@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { updateBlog } from '../reducers/blogReducer'
 import { setNotification } from '../reducers/notificationReducer'
 
+import BlogComments from './BlogComments'
+
 const Blog = props => {
   const { blog } = props
 
@@ -31,6 +33,8 @@ const Blog = props => {
           <small>Added by {blog.user.name}</small><br/>
         </p>
       </div>
+
+      <BlogComments comments={blog.comments} />
     </div>
   )
 }

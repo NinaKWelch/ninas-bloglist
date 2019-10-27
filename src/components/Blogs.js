@@ -6,7 +6,7 @@ import BlogList from './BlogList'
 const Blogs = ({ handleBlogCreation, blogs }) => (
   <div>
     <h2>Blogs App</h2>
-    
+
     <Togglable buttonLabel='Add new blog'>
       <BlogForm handleBlogCreation={handleBlogCreation} />
     </Togglable>

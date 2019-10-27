@@ -1,16 +1,17 @@
 import React from 'react'
 
-const BlogComments = ({ comments }) => {
+import BlogCommentsForm from './BlogCommentsForm'
+import BlogCommentsList from './BlogCommentsList'
+
+const BlogComments = ({ comments, handleCommentCreation }) => {
   return (
-    <ul style={{ paddingLeft: 0 }}>
+    <div>
       <h4>Comments</h4>
 
-      {comments.map(comment =>
-        <li key={comment.id} style={{ marginLeft: 30 }}>
-          {comment.content}
-        </li>
-      )}
-    </ul>
+      <BlogCommentsForm handleCommentCreation={handleCommentCreation} />
+
+      <BlogCommentsList comments={comments} />
+    </div>
   )
 }
 

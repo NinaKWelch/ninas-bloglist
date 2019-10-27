@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { updateBlog } from '../reducers/blogReducer'
+import { updateLikes, createComment } from '../reducers/blogReducer'
 import { setNotification } from '../reducers/notificationReducer'
 
 import BlogComments from './BlogComments'
@@ -8,12 +8,18 @@ import BlogComments from './BlogComments'
 const Blog = props => {
   const { blog } = props
 
-  const addLikes = blog => {
-    props.updateBlog({
+  const addLikes = () => {
+    props.updateLikes({
       ...blog,
       user: blog.user.id
     })
+
     props.setNotification(`New like added for ${blog.title}`)
+  }
+
+  const addComment = comment => {
+    props.createComment(comment, blog.id)
+    props.setNotification(`New comment added for ${blog.title}`)
   }
 
   if ( blog === undefined) {
@@ -29,22 +35,29 @@ const Blog = props => {
       <div>
         <p>
           <a href={blog.url}>{blog.url}</a><br/>
-          {blog.likes} Likes <button onClick={() => addLikes(blog)}>Like</button><br/>
+          {blog.likes} Likes <button onClick={() => addLikes()}>Like</button><br/>
           <small>Added by {blog.user.name}</small><br/>
         </p>
       </div>
 
-      <BlogComments comments={blog.comments} />
+      <BlogComments comments={blog.comments} handleCommentCreation={addComment} />
     </div>
   )
 }
 
+const mapStateToProps = state => {
+  return {
+    blogs: state.blogs
+  }
+}
+
 const mapDispatchToProps = {
-  updateBlog,
+  updateLikes,
+  createComment,
   setNotification
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Blog)

@@ -1,4 +1,5 @@
 import blogService from '../services/blogs'
+import commentService from '../services/comments'
 
 const reducer = (state = [], action) => {
   console.log('ACTION:', action)
@@ -10,8 +11,7 @@ const reducer = (state = [], action) => {
     return state.concat(action.data)
   case 'DELETE_BLOG':
     return state.filter(blog => blog.id !== action.data)
-  case 'UPDATE_BLOG': {
-    // https://eslint.org/docs/rules/no-case-declarations
+  case 'UPDATE_LIKES': {
     let blogToChange = state.find(blog => blog.id === action.data.id)
     let changedBlog = {
       ...blogToChange,
@@ -19,7 +19,18 @@ const reducer = (state = [], action) => {
     }
 
     return state.map(blog =>
-      blog.id !== action.data.id ? blog : changedBlog
+      blog.id !== changedBlog.id ? blog : changedBlog
+    )
+  }
+  case 'CREATE_COMMENT': {
+    let blogToChange = state.find(blog => blog.id === action.data.blog)
+    let changedBlog = {
+      ...blogToChange,
+      comments: blogToChange.comments.concat(action.data)
+    }
+
+    return state.map(blog =>
+      blog.id !== changedBlog.id ? blog : changedBlog
     )
   }
   default:
@@ -57,12 +68,22 @@ export const deleteBlog = id => {
   }
 }
 
-export const updateBlog = blog => {
+export const updateLikes = blog => {
   return async dispatch => {
     const updatedBlog = await blogService.update(blog)
     dispatch({
-      type: 'UPDATE_BLOG',
+      type: 'UPDATE_LIKES',
       data: updatedBlog
+    })
+  }
+}
+
+export const createComment = (comment, id) => {
+  return async dispatch => {
+    const newComment = await commentService.create(comment, id)
+    dispatch({
+      type: 'CREATE_COMMENT',
+      data: newComment
     })
   }
 }

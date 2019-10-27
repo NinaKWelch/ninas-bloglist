@@ -93,7 +93,9 @@ const App = props => {
           <Router>
             <div style={{ background: 'lightgray', padding: '10px 5px' }}>
               <Link to='/' style={{ paddingRight: 10 }}>Blogs</Link>
+
               <Link to='/users' style={{ paddingRight: 10 }}>Users</Link>
+
               <span>
                 {props.user.name} logged in <button onClick={handleLogout}>Logout</button>
               </span>

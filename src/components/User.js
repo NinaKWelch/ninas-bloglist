@@ -1,29 +1,44 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import BlogList from './BlogList'
+import NoMatch from './NoMatch'
+import { Container, Box, Typography } from '@material-ui/core'
 
 const User = ({ user }) => {
-  const blogsByUser = blogs => (
-    blogs.map(blog =>
-      <li key={blog.id} style={{ marginLeft: 30 }}>
-        <Link to={`/blogs/${blog.id}`}>{blog.title}</Link>
-      </li>
-    )
-  )
-
   if ( user === undefined) {
-    return null
+    return <NoMatch />
   }
 
   return (
-    <div>
-      <h3>{user.name}</h3>
+    <Container maxWidth='sm'>
+      <Box mt={4}>
+        <Typography
+          variant='h4'
+          align='center'
+          color='secondary'
+          gutterBottom
+        >
+          {user.name}
+        </Typography>
+      </Box>
 
-      <ul style={{ paddingLeft: 0 }}>
-        <h4>Added Blogs</h4>
-        
-        {blogsByUser(user.blogs)}
-      </ul>
-    </div>
+      <Typography
+        variant='h5'
+        align='center'
+        gutterBottom
+      >
+        Added Blogs
+      </Typography>
+
+      {user.blogs.length === 0 ?
+        <Typography
+          variant='body1'
+          align='center'
+        >
+          No blogs as yet.
+        </Typography> :
+        <BlogList blogs={user.blogs} variant={'selectItems'} />
+      }
+    </Container>
   )
 }
 

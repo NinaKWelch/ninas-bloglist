@@ -1,6 +1,7 @@
 const notificationReducer = (state = null, action) => {
   switch (action.type) {
   case 'SHOW':
+    console.log(action.data)
     return action.data
   case 'HIDE':
     return null
@@ -9,11 +10,13 @@ const notificationReducer = (state = null, action) => {
   }
 }
 
-export const setNotification = message => {
+export const setNotification = (message, variant) => {
+  const newMessage = { message, variant }
+
   return dispatch => {
     dispatch({
       type: 'SHOW',
-      data: message
+      data: newMessage
     })
     setTimeout(() => {
       dispatch({

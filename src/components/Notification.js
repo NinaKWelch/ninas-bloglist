@@ -1,23 +1,26 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import NotificationMessage from './NotificationMessage'
+import { Snackbar } from '@material-ui/core'
 
-const Notification = props => {
-  const message = props.notification
-
-  if (message === null) {
+const Notification = ({ notification }) => {
+  if (notification === null) {
     return null
   }
 
-  const messageStyle = {
-    border: '1px solid green',
-    color: 'green',
-    padding: 5
-  }
-
   return (
-    <div style={messageStyle}>
-      {message}
-    </div>
+    <Snackbar
+      open
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'center'
+      }}
+    >
+      <NotificationMessage
+        message={notification.message}
+        variant={notification.variant}
+      />
+    </Snackbar>
   )
 }
 

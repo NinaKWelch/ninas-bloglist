@@ -32,49 +32,36 @@ const BlogForm = ({ handleBlogCreation }) => {
   return (
     <Card>
       <CardContent>
-        <Typography
-          variant='h5'
-          align='center'
-          gutterBottom
-        >
+        <Typography variant="h5" align="center" gutterBottom>
           Create New
         </Typography>
 
-        <form onSubmit={addBlog} id='new-blog-form'>
+        <form onSubmit={addBlog} id="new-blog-form">
           <Box mt={2} mx={2} mb={3}>
             <TextField
               {...title}
-              name='Title'
-              label='Title'
+              name="Title"
+              label="Title"
               fullWidth
               required
             />
 
             <TextField
               {...author}
-              name='Author'
-              label='Author'
+              name="Author"
+              label="Author"
               fullWidth
               required
             />
 
-            <TextField
-              {...url}
-              name='Url'
-              label='Url'
-              fullWidth
-              required
-            />
+            <TextField {...url} name="Url" label="Url" fullWidth required />
           </Box>
 
-          <Typography
-            component='div'
-            align='center'
-          >
+          <Typography component="div" align="center">
             <Button
-              type='submit'
-              variant='contained'
-              color='primary'
+              type="submit"
+              variant="contained"
+              color="primary"
               startIcon={<CreateIcon />}
             >
               Create

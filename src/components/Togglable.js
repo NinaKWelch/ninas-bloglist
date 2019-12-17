@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Box, Typography, Button } from '@material-ui/core/'
 import { Clear as ClearIcon } from '@material-ui/icons'
 
-const Togglable = (props) => {
+const Togglable = props => {
   const [visible, setVisible] = useState(false)
 
   const hideWhenVisible = { display: visible ? 'none' : '' }
@@ -18,9 +18,9 @@ const Togglable = (props) => {
       <div style={hideWhenVisible}>
         <Button
           onClick={toggleVisibility}
-          variant='outlined'
-          color='primary'
-          size='large'
+          variant="outlined"
+          color="primary"
+          size="large"
           fullWidth
         >
           {props.buttonLabel}
@@ -30,14 +30,8 @@ const Togglable = (props) => {
       <div style={showWhenVisible}>
         {props.children}
 
-        <Typography
-          component='div'
-          align='right'
-        >
-          <Button
-            onClick={toggleVisibility}
-            endIcon={<ClearIcon />}
-          >
+        <Typography component="div" align="right">
+          <Button onClick={toggleVisibility} endIcon={<ClearIcon />}>
             Cancel
           </Button>
         </Typography>

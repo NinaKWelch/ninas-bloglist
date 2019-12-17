@@ -6,13 +6,7 @@ import { logoutUser } from '../reducers/loginReducer'
 import { setNotification } from '../reducers/notificationReducer'
 
 import { makeStyles } from '@material-ui/core/styles'
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Hidden,
-  Button
-} from '@material-ui/core'
+import { AppBar, Toolbar, Typography, Hidden, Button } from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -36,28 +30,22 @@ const Header = props => {
   }
 
   return (
-    <AppBar position='sticky' className={classes.root}>
+    <AppBar position="sticky" className={classes.root}>
       <Toolbar>
-        <Typography
-          variant='h5'
-          component='h1'
-          color='inherit'
-        >
+        <Typography variant="h5" component="h1" color="inherit">
           Blogs App
         </Typography>
 
         <div className={classes.grow} />
 
         <div>
-          <Hidden xsDown>
-            Logged in as {user.name}
-          </Hidden>
+          <Hidden xsDown>Logged in as {user.name}</Hidden>
 
           <Button
             onClick={logout}
             className={classes.button}
-            variant='outlined'
-            size='small'
+            variant="outlined"
+            size="small"
           >
             Logout
           </Button>
@@ -78,9 +66,4 @@ const mapDispatchToProps = {
   setNotification
 }
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Header)
-)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header))

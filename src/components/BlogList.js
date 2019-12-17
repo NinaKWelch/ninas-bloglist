@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   selectItems: {
     '&:hover .MuiAvatar-colorDefault': {
       backgroundColor: theme.palette.secondary.main
-    },
+    }
   },
   avatar: {
     backgroundColor: theme.palette.grey[300]
@@ -33,32 +33,26 @@ const BlogList = ({ blogs, variant }) => {
   const sortByMostLikes = blogs => {
     blogs.sort((a, b) => b.likes - a.likes)
 
-    return (
-      blogs.map(blog =>
-        <ListItem
-          button
-          key={blog.id}
-          to={`/blogs/${blog.id}`}
-          component={RouterLink}
-          className={clsx(classes[variant])}
-        >
-          <ListItemAvatar>
-            <Avatar className={classes.avatar}>
-              <BookmarkBorderIcon />
-            </Avatar>
-          </ListItemAvatar>
+    return blogs.map(blog => (
+      <ListItem
+        button
+        key={blog.id}
+        to={`/blogs/${blog.id}`}
+        component={RouterLink}
+        className={clsx(classes[variant])}
+      >
+        <ListItemAvatar>
+          <Avatar className={classes.avatar}>
+            <BookmarkBorderIcon />
+          </Avatar>
+        </ListItemAvatar>
 
-          <ListItemText primary={blog.title} />
-        </ListItem>
-      )
-    )
+        <ListItemText primary={blog.title} />
+      </ListItem>
+    ))
   }
 
-  return (
-    <List>
-      {sortByMostLikes(blogs)}
-    </List>
-  )
+  return <List>{sortByMostLikes(blogs)}</List>
 }
 
 export default BlogList

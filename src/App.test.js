@@ -1,5 +1,5 @@
 import React from 'react'
-import { render,  waitForElement } from '@testing-library/react'
+import { render, waitForElement } from '@testing-library/react'
 
 jest.mock('./services/blogs')
 import App from './App'
@@ -14,12 +14,8 @@ describe('<App />', () => {
   }
 
   test('blogs are not rendered, if user is not logged in', async () => {
-    component = render(
-      <App />
-    )
-    await waitForElement(
-      () => component.getByText('Login')
-    )
+    component = render(<App />)
+    await waitForElement(() => component.getByText('Login'))
 
     expect(component.container).toHaveTextContent('Login to Bloglist')
 
@@ -33,11 +29,9 @@ describe('<App />', () => {
     })
 
     test('blogs are rendered, if user is logged in', async () => {
-      component = render(
-        <App />
-      )
-      await waitForElement(
-        () => component.container.querySelector('.blog-list-item')
+      component = render(<App />)
+      await waitForElement(() =>
+        component.container.querySelector('.blog-list-item')
       )
 
       expect(component.container).not.toHaveTextContent('Login to Bloglist')
@@ -45,8 +39,8 @@ describe('<App />', () => {
       const blogs = component.container.querySelectorAll('.blog-list-item')
       expect(blogs.length).toBe(2)
 
-      expect(component.container).toHaveTextContent('Peter\'s Blog')
-      expect(component.container).toHaveTextContent('Nina\'s Blog')
+      expect(component.container).toHaveTextContent("Peter's Blog")
+      expect(component.container).toHaveTextContent("Nina's Blog")
     })
   })
 })

@@ -22,28 +22,21 @@ const BlogCommentsForm = ({ handleCommentCreation }) => {
   }
 
   return (
-    <form onSubmit={addComment} id='new-comment-form'>
-      <FormControl fullWidth variant='outlined'>
-        <InputLabel htmlFor='comment'>
-          Write your comment here...
-        </InputLabel>
+    <form onSubmit={addComment} id="new-comment-form">
+      <FormControl fullWidth variant="outlined">
+        <InputLabel htmlFor="comment">Write your comment here...</InputLabel>
 
         <OutlinedInput
           {...comment}
-          name='Comment'
-          id='comment'
+          name="Comment"
+          id="comment"
           labelWidth={200}
           multiline
         />
       </FormControl>
 
-      <Box textAlign='center' mt={2}>
-        <Button
-          type='submit'
-          variant='contained'
-          color='primary'
-          size='large'
-        >
+      <Box textAlign="center" mt={2}>
+        <Button type="submit" variant="contained" color="primary" size="large">
           Add Comment
         </Button>
       </Box>

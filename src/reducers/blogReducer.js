@@ -4,37 +4,37 @@ import commentService from '../services/comments'
 const reducer = (state = [], action) => {
   console.log('ACTION:', action)
 
-  switch(action.type) {
-  case 'INIT_BLOGS':
-    return action.data
-  case 'CREATE_BLOG':
-    return state.concat(action.data)
-  case 'DELETE_BLOG':
-    return state.filter(blog => blog.id !== action.data)
-  case 'UPDATE_LIKES': {
-    let blogToChange = state.find(blog => blog.id === action.data.id)
-    let changedBlog = {
-      ...blogToChange,
-      likes: blogToChange.likes + 1
-    }
+  switch (action.type) {
+    case 'INIT_BLOGS':
+      return action.data
+    case 'CREATE_BLOG':
+      return state.concat(action.data)
+    case 'DELETE_BLOG':
+      return state.filter(blog => blog.id !== action.data)
+    case 'UPDATE_LIKES': {
+      let blogToChange = state.find(blog => blog.id === action.data.id)
+      let changedBlog = {
+        ...blogToChange,
+        likes: blogToChange.likes + 1
+      }
 
-    return state.map(blog =>
-      blog.id !== changedBlog.id ? blog : changedBlog
-    )
-  }
-  case 'CREATE_COMMENT': {
-    let blogToChange = state.find(blog => blog.id === action.data.blog)
-    let changedBlog = {
-      ...blogToChange,
-      comments: blogToChange.comments.concat(action.data)
+      return state.map(blog =>
+        blog.id !== changedBlog.id ? blog : changedBlog
+      )
     }
+    case 'CREATE_COMMENT': {
+      let blogToChange = state.find(blog => blog.id === action.data.blog)
+      let changedBlog = {
+        ...blogToChange,
+        comments: blogToChange.comments.concat(action.data)
+      }
 
-    return state.map(blog =>
-      blog.id !== changedBlog.id ? blog : changedBlog
-    )
-  }
-  default:
-    return state
+      return state.map(blog =>
+        blog.id !== changedBlog.id ? blog : changedBlog
+      )
+    }
+    default:
+      return state
   }
 }
 

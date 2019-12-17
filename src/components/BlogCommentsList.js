@@ -1,11 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import {
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText
-} from '@material-ui/core/'
+import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core/'
 import { Comment as CommentIcon } from '@material-ui/icons'
 
 const useStyles = makeStyles(theme => ({
@@ -19,7 +14,7 @@ const BlogCommentsList = ({ comments }) => {
 
   return (
     <List>
-      {comments.map(comment =>
+      {comments.map(comment => (
         <ListItem key={comment.id}>
           <ListItemIcon>
             <CommentIcon className={classes.avatar} />
@@ -27,7 +22,7 @@ const BlogCommentsList = ({ comments }) => {
 
           <ListItemText primary={comment.content} />
         </ListItem>
-      )}
+      ))}
     </List>
   )
 }

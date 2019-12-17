@@ -13,4 +13,4 @@ const getOne = id => {
 }
 */
 
-export default { getAll/*, getOne*/ }
+export default { getAll /*, getOne*/ }

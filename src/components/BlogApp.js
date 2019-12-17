@@ -21,14 +21,7 @@ import NoMatch from './NoMatch'
 import { Paper, Tabs, Tab } from '@material-ui/core'
 
 const BlogApp = props => {
-  const {
-    blogs,
-    users,
-    user,
-    createBlog,
-    setNotification,
-    history
-  } = props
+  const { blogs, users, user, createBlog, setNotification, history } = props
 
   const addNewBlog = blog => {
     let currentUser = {
@@ -37,7 +30,10 @@ const BlogApp = props => {
     }
 
     createBlog(blog, currentUser)
-    setNotification(`New Blog '${blog.title}' by ${blog.author} added`, 'success')
+    setNotification(
+      `New Blog '${blog.title}' by ${blog.author} added`,
+      'success'
+    )
   }
 
   const userById = id => {
@@ -57,54 +53,59 @@ const BlogApp = props => {
       <Header history={history} />
 
       <Route
-        path='/'
+        path="/"
         render={({ location }) => (
           <div>
             <Paper square>
               <Tabs
                 value={
-                  (location.pathname === '/' || location.pathname === '/users') ?
-                    location.pathname :
-                    false
+                  location.pathname === '/' || location.pathname === '/users'
+                    ? location.pathname
+                    : false
                 }
                 onChange={handleChange}
-                indicatorColor={location.pathname === '/' ? 'primary' : 'secondary'}
+                indicatorColor={
+                  location.pathname === '/' ? 'primary' : 'secondary'
+                }
                 centered
               >
-                <Tab
-                  label='Blogs'
-                  component={RouterLink}
-                  to='/'
-                  value='/'
-                />
+                <Tab label="Blogs" component={RouterLink} to="/" value="/" />
 
                 <Tab
-                  label='Users'
+                  label="Users"
                   component={RouterLink}
-                  to='/users'
-                  value='/users'
+                  to="/users"
+                  value="/users"
                 />
               </Tabs>
             </Paper>
 
             <Switch>
-              <Route path='/blogs/:id' render={({ match }) =>
-                <Blog blog={blogById(match.params.id)} />
-              } />
+              <Route
+                path="/blogs/:id"
+                render={({ match }) => (
+                  <Blog blog={blogById(match.params.id)} />
+                )}
+              />
 
-              <Route path='/users/:id' render={({ match }) =>
-                <User user={userById(match.params.id)} />
-              } />
+              <Route
+                path="/users/:id"
+                render={({ match }) => (
+                  <User user={userById(match.params.id)} />
+                )}
+              />
 
-              <Route path='/users' render={() =>
-                <Users users={users} />
-              } />
+              <Route path="/users" render={() => <Users users={users} />} />
 
-              <Redirect exact from='/blogs' to='/' />
+              <Redirect exact from="/blogs" to="/" />
 
-              <Route exact path='/' render={() =>
-                <Blogs blogs={blogs} handleBlogCreation={addNewBlog} />
-              } />
+              <Route
+                exact
+                path="/"
+                render={() => (
+                  <Blogs blogs={blogs} handleBlogCreation={addNewBlog} />
+                )}
+              />
 
               <Route>
                 <NoMatch />
@@ -130,9 +131,4 @@ const mapDispatchToProps = {
   setNotification
 }
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(BlogApp)
-)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BlogApp))

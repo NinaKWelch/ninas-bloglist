@@ -7,26 +7,24 @@ describe('<SimpleBlog />', () => {
   let mockHandler
 
   const blog = {
-    title: 'Peter\'s Blog',
+    title: "Peter's Blog",
     author: 'Peter',
     likes: 2
   }
 
-  beforeEach( () => {
+  beforeEach(() => {
     mockHandler = jest.fn()
-    component = render(
-      <SimpleBlog blog={blog} onClick={mockHandler} />
-    )
+    component = render(<SimpleBlog blog={blog} onClick={mockHandler} />)
   })
 
   test('renders content', () => {
-    expect(component.container).toHaveTextContent(
-      'Peter\'s Blog, Peter'
-    )
+    expect(component.container).toHaveTextContent("Peter's Blog, Peter")
 
     expect(component.container).toHaveTextContent(blog.title)
     expect(component.container).toHaveTextContent(blog.author)
-    expect(component.container).toHaveTextContent(`blog has ${blog.likes} likes`)
+    expect(component.container).toHaveTextContent(
+      `blog has ${blog.likes} likes`
+    )
   })
 
   test('clicking the button twice calls event handler twice', () => {

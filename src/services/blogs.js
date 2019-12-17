@@ -39,8 +39,20 @@ const remove = async id => {
 
 const update = async newObject => {
   const object = { ...newObject, likes: newObject.likes + 1 }
-  const response = await axios.put(`${baseUrl}/${newObject.id}`, object, getConfig())
+  const response = await axios.put(
+    `${baseUrl}/${newObject.id}`,
+    object,
+    getConfig()
+  )
   return response.data
 }
 
-export default { getAll/*, getOne*/, create, remove, update, setToken, destroyToken }
+export default {
+  getAll,
+  /* getOne, */
+  create,
+  remove,
+  update,
+  setToken,
+  destroyToken
+}

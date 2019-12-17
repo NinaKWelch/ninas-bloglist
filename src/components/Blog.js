@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
   },
   actions: {
     justifyContent: 'space-between',
-    padding: theme.spacing(1,2),
+    padding: theme.spacing(1, 2),
     backgroundColor: theme.palette.grey[200]
   },
   button: {
@@ -55,34 +55,29 @@ const Blog = props => {
   const addComment = comment => {
     createComment(comment, blog.id)
 
-    comment.content.length < 2 ?
-      setNotification('Comment too short', 'error') :
-      setNotification(`New comment added for '${blog.title}'`, 'success')
+    comment.content.length < 2
+      ? setNotification('Comment too short', 'error')
+      : setNotification(`New comment added for '${blog.title}'`, 'success')
   }
 
-  if ( blog === undefined) {
+  if (blog === undefined) {
     return <NoMatch />
   }
 
   return (
-    <Container maxWidth='sm'>
+    <Container maxWidth="sm">
       <Card className={classes.card}>
         <CardActionArea href={blog.url}>
           <CardContent>
-            <Typography
-              variant='h5'
-              component='h3'
-              align='center'
-              gutterBottom
-            >
+            <Typography variant="h5" component="h3" align="center" gutterBottom>
               {blog.title}
             </Typography>
 
             <Typography
-              variant='subtitle1'
-              component='h4'
-              color='textSecondary'
-              align='center'
+              variant="subtitle1"
+              component="h4"
+              color="textSecondary"
+              align="center"
             >
               by {blog.author}
             </Typography>
@@ -90,17 +85,16 @@ const Blog = props => {
         </CardActionArea>
 
         <CardActions className={classes.actions}>
-          <Typography variant='body1'>
+          <Typography variant="body1">
             Added by <strong>{blog.user.name}</strong>
           </Typography>
 
-          <Typography componenet='div'>
+          <Typography componenet="div">
             {blog.likes} Likes
-
             <Fab
               onClick={() => addLikes()}
-              size='medium'
-              aria-label='add like'
+              size="medium"
+              aria-label="add like"
               className={classes.button}
             >
               <FavoriteBorderIcon />
@@ -123,7 +117,4 @@ const mapDispatchToProps = {
   setNotification
 }
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Blog)
+export default connect(null, mapDispatchToProps)(Blog)

@@ -19,10 +19,7 @@ const NotificationMessage = ({ message, variant }) => {
   const classes = useStyles()
 
   return (
-    <SnackbarContent
-      className={clsx(classes[variant])}
-      message={message}
-    />
+    <SnackbarContent className={clsx(classes[variant])} message={message} />
   )
 }
 

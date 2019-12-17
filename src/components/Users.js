@@ -24,56 +24,42 @@ const StyledTableCell = withStyles(() => ({
 }))(TableCell)
 
 const Users = ({ users }) => {
-  const userStats = users => (
-    users.map(user =>
+  const userStats = users =>
+    users.map(user => (
       <TableRow key={user.id}>
         <StyledTableCell>
           <Link
             to={`/users/${user.id}`}
             component={RouterLink}
-            color='secondary'
+            color="secondary"
           >
             {user.name}
           </Link>
         </StyledTableCell>
 
-        <StyledTableCell>
-          {user.blogs.length}
-        </StyledTableCell>
+        <StyledTableCell>{user.blogs.length}</StyledTableCell>
       </TableRow>
-    )
-  )
+    ))
 
   return (
-    <Container maxWidth='sm'>
+    <Container maxWidth="sm">
       <Box mt={4} mb={3}>
-        <Typography
-          variant='h3'
-          align='center'
-          color='secondary'
-          gutterBottom
-        >
+        <Typography variant="h3" align="center" color="secondary" gutterBottom>
           Users
         </Typography>
       </Box>
 
-      <Table aria-label='user table'>
-        <TableHead color='primary'>
+      <Table aria-label="user table">
+        <TableHead color="primary">
           <TableRow>
-            <StyledTableCell>
-              Name
-            </StyledTableCell>
+            <StyledTableCell>Name</StyledTableCell>
 
-            <StyledTableCell>
-              Blogs
-            </StyledTableCell>
+            <StyledTableCell>Blogs</StyledTableCell>
           </TableRow>
         </TableHead>
 
-        <TableBody>
-          {userStats(users)}
-        </TableBody>
-      </Table >
+        <TableBody>{userStats(users)}</TableBody>
+      </Table>
     </Container>
   )
 }

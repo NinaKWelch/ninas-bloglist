@@ -6,7 +6,8 @@ module.exports = {
   },
   "extends": [ 
     "eslint:recommended",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "plugin:prettier/recommended"
   ],
   "parserOptions": {
     "ecmaFeatures": {
@@ -23,9 +24,17 @@ module.exports = {
   "plugins": [
     "react",
     "react-hooks",
-    "jest"
+    "jest",
+    "prettier"
   ],
   "rules": {
+    "prettier/prettier": [
+      "error", {
+        "semi": false,
+        "singleQuote": true
+      }
+    ],
+    /*
     "indent": [
         "error",
         2
@@ -54,9 +63,9 @@ module.exports = {
             "after": true
         }
     ],
-    "no-console": 0,
+    "no-console": 0, */
     "react/prop-types": 0,
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn" 
+    "react-hooks/exhaustive-deps": "warn"
   }
 };

@@ -30,6 +30,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(
-  mapStateToProps
-)(Notification)
+export default connect(mapStateToProps)(Notification)

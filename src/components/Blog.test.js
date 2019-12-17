@@ -4,7 +4,7 @@ import Blog from './Blog'
 
 describe('<Blog />', () => {
   const blog = {
-    title: 'Peter\'s Blog',
+    title: "Peter's Blog",
     author: 'Peter',
     likes: 2,
     url: 'http://peter.com',
@@ -22,11 +22,7 @@ describe('<Blog />', () => {
   beforeEach(() => {
     const mockHandler = jest.fn()
 
-    component = render(<Blog
-      blog={blog}
-      user={user}
-      onClick={mockHandler}
-    />)
+    component = render(<Blog blog={blog} user={user} onClick={mockHandler} />)
   })
 
   test('renders the blog title and author', () => {

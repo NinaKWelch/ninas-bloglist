@@ -3,13 +3,13 @@ import blogService from '../services/blogs'
 const reducer = (state = null, action) => {
   console.log('ACTION:', action)
 
-  switch(action.type) {
-  case 'LOGIN':
-    return action.data
-  case 'LOGOUT':
-    return null
-  default:
-    return state
+  switch (action.type) {
+    case 'LOGIN':
+      return action.data
+    case 'LOGOUT':
+      return null
+    default:
+      return state
   }
 }
 
@@ -26,9 +26,7 @@ export const initializeUser = user => {
 
 export const loginUser = user => {
   return dispatch => {
-    window.localStorage.setItem(
-      'loggedBloglistUser', JSON.stringify(user)
-    )
+    window.localStorage.setItem('loggedBloglistUser', JSON.stringify(user))
     blogService.setToken(user.token)
 
     dispatch({

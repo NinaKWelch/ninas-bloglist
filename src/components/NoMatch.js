@@ -3,10 +3,7 @@ import { Box, Typography } from '@material-ui/core'
 
 const NoMatch = () => (
   <Box mt={6}>
-    <Typography
-      variant='h5'
-      align='center'
-    >
+    <Typography variant="h5" align="center">
       This page does not exist!
     </Typography>
   </Box>

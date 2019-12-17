@@ -65,14 +65,15 @@ const App = props => {
       <div>
         <Notification />
 
-        {user === null ?
+        {user === null ? (
           <LoginForm
             username={username}
             password={password}
             handleSubmit={login}
-          /> :
+          />
+        ) : (
           <BlogApp />
-        }
+        )}
       </div>
     </Router>
   )
@@ -93,7 +94,4 @@ const mapDispatchToProps = {
   loginUser
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)

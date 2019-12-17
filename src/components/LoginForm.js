@@ -29,58 +29,47 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const LoginForm = ({
-  username,
-  password,
-  handleSubmit
-}) => {
+const LoginForm = ({ username, password, handleSubmit }) => {
   const classes = useStyles()
 
   return (
-    <Container maxWidth='xs'>
+    <Container maxWidth="xs">
       <div className={classes.root}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
 
-        <Typography
-          component='h2'
-          variant='h5'
-        >
+        <Typography component="h2" variant="h5">
           Sign In to Bloglist
         </Typography>
 
-        <form
-          onSubmit={handleSubmit}
-          className={classes.form}
-          id='login-form'
-        >
+        <form onSubmit={handleSubmit} className={classes.form} id="login-form">
           <TextField
             {...username}
-            name='Username'
-            variant='outlined'
-            margin='normal'
+            name="Username"
+            variant="outlined"
+            margin="normal"
             required
             fullWidth
             autoFocus
-            label='Username'
+            label="Username"
           />
 
           <TextField
             {...password}
-            name='Password'
-            variant='outlined'
-            margin='normal'
+            name="Password"
+            variant="outlined"
+            margin="normal"
             required
             fullWidth
-            label='Password'
+            label="Password"
           />
 
           <Button
-            type='submit'
-            variant='contained'
-            color='primary'
-            size='large'
+            type="submit"
+            variant="contained"
+            color="primary"
+            size="large"
             className={classes.submit}
             fullWidth
           >
@@ -93,4 +82,3 @@ const LoginForm = ({
 }
 
 export default LoginForm
-

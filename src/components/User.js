@@ -1,7 +1,7 @@
 import React from 'react'
+import { Container, Box, Typography } from '@material-ui/core'
 import BlogList from './BlogList'
 import NoMatch from './NoMatch'
-import { Container, Box, Typography } from '@material-ui/core'
 
 const User = ({ user }) => {
   if (user === undefined) {
@@ -25,7 +25,7 @@ const User = ({ user }) => {
           No blogs as yet.
         </Typography>
       ) : (
-        <BlogList blogs={user.blogs} variant={'selectItems'} />
+        <BlogList blogs={user.blogs} variant="selectItems" />
       )}
     </Container>
   )

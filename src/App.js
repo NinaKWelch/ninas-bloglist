@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { useField } from './hooks'
+
 import loginService from './services/login'
 
 import { initializeBlogs } from './reducers/blogReducer'
@@ -17,46 +18,38 @@ const App = props => {
   const [username] = useField('text')
   const [password] = useField('password')
 
-  const {
-    initializeBlogs,
-    initializeUsers,
-    initializeUser,
-    setNotification,
-    loginUser,
-    user,
-    blogs
-  } = props
+  const { user, users, blogs } = props
 
   useEffect(() => {
-    initializeBlogs()
-  }, [initializeBlogs])
+    props.initializeBlogs()
+  }, [])
 
   useEffect(() => {
-    initializeUsers()
-  }, [initializeUsers, blogs])
+    props.initializeUsers()
+  }, [blogs])
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBloglistUser')
 
     if (loggedUserJSON) {
-      let user = JSON.parse(loggedUserJSON)
-      initializeUser(user)
+      const loggedUser = JSON.parse(loggedUserJSON)
+      props.initializeUser(loggedUser)
     }
-  }, [initializeUser])
+  }, [])
 
   const login = async event => {
     event.preventDefault()
 
     try {
-      let user = await loginService.login({
+      const newUser = await loginService.login({
         username: username.value,
         password: password.value
       })
 
-      loginUser(user)
-      setNotification(`Hi ${user.name}, welcome back!`, 'success')
+      props.loginUser(newUser)
+      props.setNotification(`Hi ${newUser.name}, welcome back!`, 'success')
     } catch (exception) {
-      setNotification('Check username and password', 'error')
+      props.setNotification('Check username and password', 'error')
     }
   }
 
@@ -72,7 +65,7 @@ const App = props => {
             handleSubmit={login}
           />
         ) : (
-          <BlogApp />
+          <BlogApp user={user} users={users} blogs={blogs} />
         )}
       </div>
     </Router>
@@ -82,6 +75,7 @@ const App = props => {
 const mapStateToProps = state => {
   return {
     user: state.user,
+    users: state.users,
     blogs: state.blogs
   }
 }

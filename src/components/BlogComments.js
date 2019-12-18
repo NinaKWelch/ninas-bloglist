@@ -1,7 +1,7 @@
 import React from 'react'
+import { Box, Typography } from '@material-ui/core/'
 import BlogCommentsForm from './BlogCommentsForm'
 import BlogCommentsList from './BlogCommentsList'
-import { Box, Typography } from '@material-ui/core/'
 
 const BlogComments = ({ comments, handleCommentCreation }) => (
   <Box>

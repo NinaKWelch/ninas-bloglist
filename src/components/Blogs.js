@@ -1,9 +1,8 @@
 import React from 'react'
+import { Container, Box, Typography } from '@material-ui/core'
 import Togglable from './Togglable'
 import BlogForm from './BlogForm'
 import BlogList from './BlogList'
-
-import { Container, Box, Typography } from '@material-ui/core'
 
 const Blogs = ({ blogs, handleBlogCreation }) => (
   <Container maxWidth="sm">
@@ -17,7 +16,7 @@ const Blogs = ({ blogs, handleBlogCreation }) => (
       <BlogForm handleBlogCreation={handleBlogCreation} />
     </Togglable>
 
-    <BlogList blogs={blogs} variant={'allItems'} />
+    <BlogList blogs={blogs} variant="allItems" />
   </Container>
 )
 

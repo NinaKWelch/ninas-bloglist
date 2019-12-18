@@ -1,5 +1,4 @@
 import React from 'react'
-import { useField } from '../hooks'
 import {
   FormControl,
   InputLabel,
@@ -7,6 +6,7 @@ import {
   Box,
   Button
 } from '@material-ui/core/'
+import { useField } from '../hooks'
 
 const BlogCommentsForm = ({ handleCommentCreation }) => {
   const [comment, commentReset] = useField('text')

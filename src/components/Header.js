@@ -2,11 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import { logoutUser } from '../reducers/loginReducer'
-import { setNotification } from '../reducers/notificationReducer'
-
 import { makeStyles } from '@material-ui/core/styles'
 import { AppBar, Toolbar, Typography, Hidden, Button } from '@material-ui/core'
+import { logoutUser } from '../reducers/loginReducer'
+import { setNotification } from '../reducers/notificationReducer'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -22,11 +21,11 @@ const useStyles = makeStyles(theme => ({
 
 const Header = props => {
   const classes = useStyles()
-  const { user, logoutUser, setNotification } = props
+  const { user } = props
 
   const logout = () => {
-    logoutUser()
-    setNotification(`${user.name} logged out`, 'success')
+    props.logoutUser()
+    props.setNotification(`${user.name} logged out`, 'success')
   }
 
   return (

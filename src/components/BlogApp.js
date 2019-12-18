@@ -7,6 +7,7 @@ import {
   Redirect,
   withRouter
 } from 'react-router-dom'
+import { Paper, Tabs, Tab } from '@material-ui/core'
 
 import { createBlog } from '../reducers/blogReducer'
 import { setNotification } from '../reducers/notificationReducer'
@@ -18,30 +19,28 @@ import Blog from './Blog'
 import User from './User'
 import NoMatch from './NoMatch'
 
-import { Paper, Tabs, Tab } from '@material-ui/core'
-
 const BlogApp = props => {
-  const { blogs, users, user, createBlog, setNotification, history } = props
+  const { user, users, blogs, history } = props
 
   const addNewBlog = blog => {
-    let currentUser = {
+    const currentUser = {
       name: user.name,
       username: user.username
     }
 
-    createBlog(blog, currentUser)
-    setNotification(
+    props.createBlog(blog, currentUser)
+    props.setNotification(
       `New Blog '${blog.title}' by ${blog.author} added`,
       'success'
     )
   }
 
   const userById = id => {
-    return users.find(user => user.id === id)
+    return users.find(u => u.id === id)
   }
 
   const blogById = id => {
-    return blogs.find(blog => blog.id === id)
+    return blogs.find(b => b.id === id)
   }
 
   const handleChange = value => {
@@ -118,17 +117,9 @@ const BlogApp = props => {
   )
 }
 
-const mapStateToProps = state => {
-  return {
-    user: state.user,
-    users: state.users,
-    blogs: state.blogs
-  }
-}
-
 const mapDispatchToProps = {
   createBlog,
   setNotification
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BlogApp))
+export default withRouter(connect(null, mapDispatchToProps)(BlogApp))

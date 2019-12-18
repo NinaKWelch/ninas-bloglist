@@ -4,10 +4,11 @@ module.exports = {
     "es6": true,
     "jest/globals": true
   },
-  "extends": [ 
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:prettier/recommended"
+  "extends": [
+    "airbnb",
+    "plugin:jsx-a11y/recommended",
+    "prettier",
+    "prettier/react"
   ],
   "parserOptions": {
     "ecmaFeatures": {
@@ -25,6 +26,7 @@ module.exports = {
     "react",
     "react-hooks",
     "jest",
+    "jsx-a11y",
     "prettier"
   ],
   "rules": {
@@ -34,36 +36,8 @@ module.exports = {
         "singleQuote": true
       }
     ],
-    /*
-    "indent": [
-        "error",
-        2
-    ],
-    "linebreak-style": [
-        "error",
-        "unix"
-    ],
-    "quotes": [
-        "error",
-        "single"
-    ],
-    "semi": [
-        "error",
-        "never"
-    ],
-    "eqeqeq": "error",
-    "no-trailing-spaces": "error",
-    "object-curly-spacing": [
-        "error", 
-        "always"
-    ],
-    "arrow-spacing": [
-        "error", { 
-            "before": true,
-            "after": true
-        }
-    ],
-    "no-console": 0, */
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-props-no-spreading": [0, { "custom": "ignore" }],
     "react/prop-types": 0,
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn"

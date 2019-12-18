@@ -24,20 +24,16 @@ const StyledTableCell = withStyles(() => ({
 }))(TableCell)
 
 const Users = ({ users }) => {
-  const userStats = users =>
-    users.map(user => (
-      <TableRow key={user.id}>
+  const userStats = appUsers =>
+    appUsers.map(u => (
+      <TableRow key={u.id}>
         <StyledTableCell>
-          <Link
-            to={`/users/${user.id}`}
-            component={RouterLink}
-            color="secondary"
-          >
-            {user.name}
+          <Link to={`/users/${u.id}`} component={RouterLink} color="secondary">
+            {u.name}
           </Link>
         </StyledTableCell>
 
-        <StyledTableCell>{user.blogs.length}</StyledTableCell>
+        <StyledTableCell>{u.blogs.length}</StyledTableCell>
       </TableRow>
     ))
 

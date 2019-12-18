@@ -1,7 +1,7 @@
 const blogs = [
   {
     id: '5d56d5b8bbf48a1c72fa8e44',
-    title: 'Peter\'s Blog',
+    title: "Peter's Blog",
     author: 'Peter',
     url: 'http://peter.com',
     likes: 3,
@@ -13,7 +13,7 @@ const blogs = [
   },
   {
     id: '5d56d8fdbbf48a1c72fa8e48',
-    title: 'Nina\'s Blog',
+    title: "Nina's Blog",
     author: 'Nina',
     url: 'http://nina.com',
     likes: 2,
@@ -38,6 +38,5 @@ const setToken = newToken => {
 */
 
 const setToken = () => {}
-
 
 export default { getAll, setToken }

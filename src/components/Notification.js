@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import NotificationMessage from './NotificationMessage'
 import { Snackbar } from '@material-ui/core'
+import NotificationMessage from './NotificationMessage'
 
 const Notification = ({ notification }) => {
   if (notification === null) {

@@ -1,4 +1,5 @@
 import axios from 'axios'
+
 const baseUrl = '/api/users'
 
 const getAll = () => {
@@ -13,4 +14,4 @@ const getOne = id => {
 }
 */
 
-export default { getAll /*, getOne*/ }
+export default { getAll /* , getOne */ }

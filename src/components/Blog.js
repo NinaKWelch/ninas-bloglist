@@ -1,13 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { updateLikes, createComment } from '../reducers/blogReducer'
-import { setNotification } from '../reducers/notificationReducer'
-
-import BlogComments from './BlogComments'
-import NoMatch from './NoMatch'
-
-import { makeStyles } from '@material-ui/core/styles'
 import {
   Container,
   CardActionArea,
@@ -17,7 +10,13 @@ import {
   CardActions,
   Fab
 } from '@material-ui/core/'
+import { makeStyles } from '@material-ui/core/styles'
 import { FavoriteBorder as FavoriteBorderIcon } from '@material-ui/icons'
+import { updateLikes, createComment } from '../reducers/blogReducer'
+import { setNotification } from '../reducers/notificationReducer'
+
+import BlogComments from './BlogComments'
+import NoMatch from './NoMatch'
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -41,23 +40,26 @@ const useStyles = makeStyles(theme => ({
 
 const Blog = props => {
   const classes = useStyles()
-  const { blog, updateLikes, createComment, setNotification } = props
+  const { blog } = props
 
   const addLikes = () => {
-    updateLikes({
+    props.updateLikes({
       ...blog,
       user: blog.user.id
     })
 
-    setNotification(`New like added for '${blog.title}'`, 'success')
+    props.setNotification(`New like added for '${blog.title}'`, 'success')
   }
 
   const addComment = comment => {
-    createComment(comment, blog.id)
+    props.createComment(comment, blog.id)
 
-    comment.content.length < 2
-      ? setNotification('Comment too short', 'error')
-      : setNotification(`New comment added for '${blog.title}'`, 'success')
+    const num = comment.content.length
+
+    if (num < 2) {
+      props.setNotification('Comment too short', 'error')
+    }
+    props.setNotification(`New comment added for '${blog.title}'`, 'success')
   }
 
   if (blog === undefined) {

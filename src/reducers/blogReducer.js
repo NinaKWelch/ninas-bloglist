@@ -2,7 +2,7 @@ import blogService from '../services/blogs'
 import commentService from '../services/comments'
 
 const reducer = (state = [], action) => {
-  console.log('ACTION:', action)
+  // console.log('ACTION:', action)
 
   switch (action.type) {
     case 'INIT_BLOGS':
@@ -12,8 +12,8 @@ const reducer = (state = [], action) => {
     case 'DELETE_BLOG':
       return state.filter(blog => blog.id !== action.data)
     case 'UPDATE_LIKES': {
-      let blogToChange = state.find(blog => blog.id === action.data.id)
-      let changedBlog = {
+      const blogToChange = state.find(blog => blog.id === action.data.id)
+      const changedBlog = {
         ...blogToChange,
         likes: blogToChange.likes + 1
       }
@@ -23,8 +23,8 @@ const reducer = (state = [], action) => {
       )
     }
     case 'CREATE_COMMENT': {
-      let blogToChange = state.find(blog => blog.id === action.data.blog)
-      let changedBlog = {
+      const blogToChange = state.find(blog => blog.id === action.data.blog)
+      const changedBlog = {
         ...blogToChange,
         comments: blogToChange.comments.concat(action.data)
       }
@@ -53,7 +53,7 @@ export const createBlog = (blog, user) => {
     const newBlog = await blogService.create(blog)
     dispatch({
       type: 'CREATE_BLOG',
-      data: { ...newBlog, user: user }
+      data: { ...newBlog, user }
     })
   }
 }

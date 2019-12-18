@@ -30,8 +30,8 @@ const useStyles = makeStyles(theme => ({
 const BlogList = ({ blogs, variant }) => {
   const classes = useStyles()
 
-  const sortByMostLikes = blogs => {
-    blogs.sort((a, b) => b.likes - a.likes)
+  const sortByMostLikes = arr => {
+    arr.sort((a, b) => b.likes - a.likes)
 
     return blogs.map(blog => (
       <ListItem

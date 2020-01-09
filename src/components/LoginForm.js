@@ -66,13 +66,13 @@ const LoginForm = ({ username, password, handleSubmit }) => {
           />
 
           <Button
-            data-cy="submit"
             type="submit"
             variant="contained"
             color="primary"
             size="large"
             className={classes.submit}
             fullWidth
+            data-cy="submit"
           >
             Sign In
           </Button>

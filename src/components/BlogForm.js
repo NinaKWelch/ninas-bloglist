@@ -44,6 +44,7 @@ const BlogForm = ({ handleBlogCreation }) => {
               label="Title"
               fullWidth
               required
+              data-cy="title"
             />
 
             <TextField
@@ -52,9 +53,17 @@ const BlogForm = ({ handleBlogCreation }) => {
               label="Author"
               fullWidth
               required
+              data-cy="author"
             />
 
-            <TextField {...url} name="Url" label="Url" fullWidth required />
+            <TextField
+              {...url}
+              name="Url"
+              label="Url"
+              fullWidth
+              required
+              data-cy="url"
+            />
           </Box>
 
           <Typography component="div" align="center">
@@ -63,6 +72,7 @@ const BlogForm = ({ handleBlogCreation }) => {
               variant="contained"
               color="primary"
               startIcon={<CreateIcon />}
+              data-cy="create"
             >
               Create
             </Button>

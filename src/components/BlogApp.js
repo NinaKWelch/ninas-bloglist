@@ -23,16 +23,24 @@ const BlogApp = props => {
   const { user, users, blogs, history } = props
 
   const addNewBlog = blog => {
-    const currentUser = {
-      name: user.name,
-      username: user.username
-    }
+    const duplicate = blogs.find(b => b.url === blog.url)
 
-    props.createBlog(blog, currentUser)
-    props.setNotification(
-      `New Blog '${blog.title}' by ${blog.author} added`,
-      'success'
-    )
+    if (blog.title.length < 4 || blog.author.length < 2) {
+      props.setNotification('Title or author name too short', 'error')
+    } else if (duplicate) {
+      props.setNotification('This blog already exists', 'error')
+    } else {
+      const currentUser = {
+        name: user.name,
+        username: user.username
+      }
+
+      props.createBlog(blog, currentUser)
+      props.setNotification(
+        `New Blog '${blog.title}' by ${blog.author} added`,
+        'success'
+      )
+    }
   }
 
   const userById = id => {

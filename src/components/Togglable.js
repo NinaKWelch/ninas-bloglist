@@ -31,7 +31,11 @@ const Togglable = ({ buttonLabel, children }) => {
         {children}
 
         <Typography component="div" align="right">
-          <Button onClick={toggleVisibility} endIcon={<ClearIcon />}>
+          <Button
+            onClick={toggleVisibility}
+            endIcon={<ClearIcon />}
+            data-cy="cancel"
+          >
             Cancel
           </Button>
         </Typography>

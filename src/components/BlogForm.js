@@ -60,6 +60,7 @@ const BlogForm = ({ handleBlogCreation }) => {
               {...url}
               name="Url"
               label="Url"
+              type="url"
               fullWidth
               required
               data-cy="url"

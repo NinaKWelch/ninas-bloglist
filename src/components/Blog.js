@@ -52,14 +52,12 @@ const Blog = props => {
   }
 
   const addComment = comment => {
-    props.createComment(comment, blog.id)
-
-    const num = comment.content.length
-
-    if (num < 2) {
+    if (comment.content.length < 2) {
       props.setNotification('Comment too short', 'error')
+    } else {
+      props.createComment(comment, blog.id)
+      props.setNotification(`New comment added for '${blog.title}'`, 'success')
     }
-    props.setNotification(`New comment added for '${blog.title}'`, 'success')
   }
 
   if (blog === undefined) {

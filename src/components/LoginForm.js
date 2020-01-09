@@ -66,6 +66,7 @@ const LoginForm = ({ username, password, handleSubmit }) => {
           />
 
           <Button
+            data-cy="submit"
             type="submit"
             variant="contained"
             color="primary"

@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core/'
@@ -15,7 +16,7 @@ const BlogCommentsList = ({ comments }) => {
   return (
     <List>
       {comments.map(comment => (
-        <ListItem key={comment.id}>
+        <ListItem key={comment._id}>
           <ListItemIcon>
             <CommentIcon className={classes.avatar} />
           </ListItemIcon>

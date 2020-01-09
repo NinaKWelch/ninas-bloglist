@@ -22,10 +22,12 @@ const App = props => {
 
   useEffect(() => {
     props.initializeBlogs()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
     props.initializeUsers()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [blogs])
 
   useEffect(() => {
@@ -35,6 +37,7 @@ const App = props => {
       const loggedUser = JSON.parse(loggedUserJSON)
       props.initializeUser(loggedUser)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const login = async event => {

@@ -1,4 +1,19 @@
-# Bloglist 
+# Bloglist App
+
+Backend repository at https://github.com/NinaKWelch/ninas-bloglist-backend
+
+## Webpack
+
+There is another version of the app with it's own webpack configuration [here](https://github.com/NinaKWelch/ninas-bloglist/tree/webpack).
+
+## Website 
+
+Live version of the app can be found at https://vast-wave-20661.herokuapp.com/
+
+### Sign in as Supreuser
+
+username: **user**
+password: **userpw**
 
 ## Screens
 

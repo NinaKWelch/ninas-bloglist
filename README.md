@@ -4,6 +4,8 @@
 
 https://github.com/NinaKWelch/ninas-bloglist/tree/webpack
 
+Backend branch at https://github.com/NinaKWelch/ninas-bloglist-backend/tree/webpack
+
 ## New dependencies
 
 ```

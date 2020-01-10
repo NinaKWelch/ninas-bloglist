@@ -53,6 +53,7 @@ const LoginForm = ({ username, password, handleSubmit }) => {
             fullWidth
             autoFocus
             label="Username"
+            autoComplete="username"
           />
 
           <TextField
@@ -63,6 +64,7 @@ const LoginForm = ({ username, password, handleSubmit }) => {
             required
             fullWidth
             label="Password"
+            autoComplete="current-password"
           />
 
           <Button

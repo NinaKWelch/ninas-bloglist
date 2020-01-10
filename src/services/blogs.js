@@ -21,13 +21,6 @@ const getAll = () => {
   return request.then(response => response.data)
 }
 
-/*
-const getOne = id => {
-  const request = axios.get(`${baseUrl}/${id}`)
-  return request.then(response => response.data)
-}
-*/
-
 const create = async newObject => {
   const response = await axios.post(baseUrl, newObject, getConfig())
   return response.data
@@ -50,7 +43,6 @@ const update = async newObject => {
 
 export default {
   getAll,
-  /* getOne, */
   create,
   remove,
   update,

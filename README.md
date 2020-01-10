@@ -18,22 +18,9 @@ file-loader
 @babel/preset-env
 eslint-plugin-import
 eslint-plugin-react
-html-webpack-plugin
-html-webpack-template
-
 ```
 
 Note: `style-loader` and `css-loader` not needed as all styles are in _js_ files.
-
-## View production build in browser
-
-1. Move to the build folder with `cd build`
-
-2. Run `npx static-server`
-
-3. Go to _localhost:8080_
-
-Note: the production build does not connect to backend API
 
 # Development set up
 
@@ -43,8 +30,9 @@ Note: the production build does not connect to backend API
 
 3. Go to _localhost:3000_
 
+4. Sign in (you must have a user in the database, as registration is not enabled)
 
-##  Webpack Issues
+##  Webpack Issues to be resolved
 
 On `--mode=development` Babel notified about style files being too big.
 

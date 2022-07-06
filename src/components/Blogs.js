@@ -6,8 +6,14 @@ import BlogList from './BlogList'
 
 const Blogs = ({ blogs, handleBlogCreation }) => (
   <Container maxWidth="sm">
-    <Box mt={4} mb={3}>
-      <Typography variant="h3" align="center" color="primary" gutterBottom>
+    <Box mt={4} mb={3} pt={4}>
+      <Typography
+        variant="h3"
+        component="h2"
+        align="center"
+        color="primary"
+        gutterBottom
+      >
         Blogs
       </Typography>
     </Box>

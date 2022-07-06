@@ -32,7 +32,7 @@ const BlogForm = ({ handleBlogCreation }) => {
   return (
     <Card>
       <CardContent>
-        <Typography variant="h5" align="center" gutterBottom>
+        <Typography variant="h5" component="h3" align="center" gutterBottom>
           Create New
         </Typography>
 

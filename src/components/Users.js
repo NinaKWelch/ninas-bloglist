@@ -39,7 +39,7 @@ const Users = ({ users }) => {
 
   return (
     <Container maxWidth="sm">
-      <Box mt={4} mb={3}>
+      <Box mt={4} mb={3} pt={4}>
         <Typography variant="h3" align="center" color="secondary" gutterBottom>
           Users
         </Typography>

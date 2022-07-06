@@ -5,7 +5,7 @@ import BlogCommentsList from './BlogCommentsList'
 
 const BlogComments = ({ comments, handleCommentCreation }) => (
   <Box>
-    <Typography variant="h5" align="center" gutterBottom>
+    <Typography variant="h5" component="h3" align="center" gutterBottom>
       Comments
     </Typography>
 

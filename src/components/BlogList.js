@@ -34,21 +34,22 @@ const BlogList = ({ blogs, variant }) => {
     arr.sort((a, b) => b.likes - a.likes)
 
     return blogs.map(blog => (
-      <ListItem
-        button
-        key={blog.id}
-        to={`/blogs/${blog.id}`}
-        component={RouterLink}
-        className={clsx(classes[variant])}
-      >
-        <ListItemAvatar>
-          <Avatar className={classes.avatar}>
-            <BookmarkBorderIcon />
-          </Avatar>
-        </ListItemAvatar>
+      <li key={blog.id}>
+        <ListItem
+          component={RouterLink}
+          to={`/blogs/${blog.id}`}
+          className={clsx(classes[variant])}
+          button
+        >
+          <ListItemAvatar>
+            <Avatar className={classes.avatar}>
+              <BookmarkBorderIcon />
+            </Avatar>
+          </ListItemAvatar>
 
-        <ListItemText primary={blog.title} />
-      </ListItem>
+          <ListItemText primary={blog.title} />
+        </ListItem>
+      </li>
     ))
   }
 

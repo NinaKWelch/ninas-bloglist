@@ -10,13 +10,19 @@ const User = ({ user }) => {
 
   return (
     <Container maxWidth="sm">
-      <Box mt={4}>
-        <Typography variant="h4" align="center" color="secondary" gutterBottom>
+      <Box mt={4} pt={4}>
+        <Typography
+          variant="h4"
+          component="h2"
+          align="center"
+          color="secondary"
+          gutterBottom
+        >
           {user.name}
         </Typography>
       </Box>
 
-      <Typography variant="h5" align="center" gutterBottom>
+      <Typography variant="h5" component="h3" align="center" gutterBottom>
         Added Blogs
       </Typography>
 

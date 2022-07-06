@@ -10,7 +10,7 @@ There is another version of the app with it's own webpack configuration [here](h
 
 Live version of the app can be found at https://vast-wave-20661.herokuapp.com/
 
-### Sign in as Supreuser
+### Sign in as Superuser
 
 username: **user**
 password: **userpw**
@@ -34,3 +34,8 @@ password: **userpw**
 ![](https://res.cloudinary.com/ninaw/image/upload/c_scale,w_415/v1574352700/blogapp_1_zslnv5.png)
 ![](https://res.cloudinary.com/ninaw/image/upload/c_scale,w_415/v1574352699/blogapp_2_jbv4c8.png)
 ![](https://res.cloudinary.com/ninaw/image/upload/c_scale,w_415/v1574352701/blogapp_3_daobbu.png)
+
+## Furter Development
+
+- Make this a Progressive Web App
+- Ability for the user to delete blogs they have added and comments for those posts

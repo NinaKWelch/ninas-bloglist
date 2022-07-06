@@ -8,7 +8,7 @@ import {
   withRouter
 } from 'react-router-dom'
 import { Paper, Tabs, Tab } from '@material-ui/core'
-
+import { makeStyles } from '@material-ui/core/styles'
 import { createBlog } from '../reducers/blogReducer'
 import { setNotification } from '../reducers/notificationReducer'
 
@@ -19,7 +19,26 @@ import Blog from './Blog'
 import User from './User'
 import NoMatch from './NoMatch'
 
+const useStyles = makeStyles(theme => ({
+  content: {
+    position: 'relative'
+  },
+  submenu: {
+    position: 'fixed',
+    top: 56,
+    left: 0,
+    right: 0,
+    background: theme.palette.common.white,
+    borderBottom: '1px solid #ccc',
+    zIndex: 100,
+    [theme.breakpoints.up('sm')]: {
+      paddingTop: theme.spacing(1)
+    }
+  }
+}))
+
 const BlogApp = props => {
+  const classes = useStyles()
   const { user, users, blogs, history } = props
 
   const addNewBlog = blog => {
@@ -43,17 +62,11 @@ const BlogApp = props => {
     }
   }
 
-  const userById = id => {
-    return users.find(u => u.id === id)
-  }
+  const userById = id => users.find(u => u.id === id)
 
-  const blogById = id => {
-    return blogs.find(b => b.id === id)
-  }
+  const blogById = id => blogs.find(b => b.id === id)
 
-  const handleChange = value => {
-    history.push(value)
-  }
+  const handleChange = value => history.push(value)
 
   return (
     <div>
@@ -63,7 +76,7 @@ const BlogApp = props => {
         path="/"
         render={({ location }) => (
           <div>
-            <Paper square>
+            <Paper square className={classes.content}>
               <Tabs
                 value={
                   location.pathname === '/' || location.pathname === '/users'
@@ -74,6 +87,7 @@ const BlogApp = props => {
                 indicatorColor={
                   location.pathname === '/' ? 'primary' : 'secondary'
                 }
+                className={classes.submenu}
                 centered
               >
                 <Tab label="Blogs" component={RouterLink} to="/" value="/" />

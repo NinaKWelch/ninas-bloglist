@@ -19,6 +19,10 @@ import BlogComments from './BlogComments'
 import NoMatch from './NoMatch'
 
 const useStyles = makeStyles(theme => ({
+  main: {
+    marginTop: theme.spacing(4),
+    paddingTop: theme.spacing(2)
+  },
   card: {
     marginTop: theme.spacing(6),
     marginBottom: theme.spacing(4)
@@ -65,17 +69,17 @@ const Blog = props => {
   }
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="sm" className={classes.main}>
       <Card className={classes.card}>
         <CardActionArea href={blog.url}>
           <CardContent>
-            <Typography variant="h5" component="h3" align="center" gutterBottom>
+            <Typography variant="h5" component="h2" align="center" gutterBottom>
               {blog.title}
             </Typography>
 
             <Typography
               variant="subtitle1"
-              component="h4"
+              component="h3"
               color="textSecondary"
               align="center"
             >

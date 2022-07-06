@@ -35,7 +35,7 @@ password: **userpw**
 ![](https://res.cloudinary.com/ninaw/image/upload/c_scale,w_415/v1574352699/blogapp_2_jbv4c8.png)
 ![](https://res.cloudinary.com/ninaw/image/upload/c_scale,w_415/v1574352701/blogapp_3_daobbu.png)
 
-## Furter Development
-
+## Further Development
+- Fix browser refresh error (unknown endpoint) by fetching missing data from the server
 - Make this a Progressive Web App
 - Ability for the user to delete blogs they have added and comments for those posts

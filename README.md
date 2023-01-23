@@ -8,7 +8,7 @@ There is another version of the app with it's own webpack configuration [here](h
 
 ## Website 
 
-Live version of the app can be found at https://vast-wave-20661.herokuapp.com/
+Live version of the app can be found at https://ninas-bloglist.herokuapp.com
 
 ### Sign in as Superuser
 
